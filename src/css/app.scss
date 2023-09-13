@@ -1,0 +1,26 @@
+// app global css in SCSS form
+@function fluid-font-size(
+  $minimumSize,
+  $maximumSize,
+  $minimumViewportWidth,
+  $maximumViewportWidth
+) {
+  $fontSizeCalc: unquote(
+    'calc(#{$minimumSize}px + (#{$maximumSize} - #{$minimumSize}) * ((100vw - #{$minimumViewportWidth}px) / (#{$maximumViewportWidth} - #{$minimumViewportWidth}))) !important'
+  );
+  @return $fontSizeCalc;
+}
+
+@for $num from 8 through 28 {
+  .fontsize-#{$num} {
+    font-size: fluid-font-size($num, $num * 2 + 2, 300, 1800);
+  }
+}
+
+.body--light .required-star {
+  color: red;
+}
+
+.body--dark .required-star {
+  color: tomato;
+}
