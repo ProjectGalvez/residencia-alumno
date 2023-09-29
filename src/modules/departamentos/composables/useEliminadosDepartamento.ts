@@ -15,7 +15,7 @@ const getEliminados = async (): Promise<Departamento[]> => {
 
 const useEliminadosDepartamento = () => {
   const { data, isLoading, error, isSuccess } = useQuery(
-    ['departamentos_eliminados'],
+    ['departamentos-trashed'],
     getEliminados,
     {
       staleTime: 1000 * 60 * 60,

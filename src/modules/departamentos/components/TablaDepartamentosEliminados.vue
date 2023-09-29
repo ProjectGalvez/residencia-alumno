@@ -5,6 +5,7 @@ import useEliminadosDepartamento from '../composables/useEliminadosDepartamento'
 import useEliminarForzadoDepartamento from '../composables/useEliminarForzadoDepartamento';
 import { columnasDepartamentos as columns } from '../composables/columnasDepartamentos';
 import { Departamento } from 'src/modules/model/Model';
+import useRestaurarDepartamento from '../composables/useRestaurarDepartamento';
 
 const selected = ref<Departamento[]>([]);
 const confirmMultiple = ref(false);
@@ -14,12 +15,21 @@ const selectDepto = ref('');
 const { departamentosElimnados, isLoading, isSuccess, error } =
   useEliminadosDepartamento();
 const { eliminarDepartamento } = useEliminarForzadoDepartamento();
+const { restaurarRecurso: restaurarDepartamento } = useRestaurarDepartamento();
 
 const eliminarVarios = () => {
   const ids: string[] = selected.value.map((departamento) =>
     departamento.id.toString()
   );
   eliminarDepartamento(ids);
+  selected.value = [];
+};
+
+const restaurarVarios = () => {
+  const ids: string[] = selected.value.map((departamento) =>
+    departamento.id.toString()
+  );
+  restaurarDepartamento(ids);
   selected.value = [];
 };
 
@@ -92,7 +102,12 @@ const eliminar = (id: string) => {
     </q-dialog>
 
     <div class="flex justify-end q-gutter-md q-mb-md">
-      <q-btn :disable="!selected.length" color="secondary" icon="restore" />
+      <q-btn
+        :disable="!selected.length"
+        color="secondary"
+        icon="restore"
+        @click="restaurarVarios"
+      />
       <q-btn
         :disable="!selected.length"
         color="negative"
@@ -123,7 +138,14 @@ const eliminar = (id: string) => {
           }}</q-td>
           <q-td key="accion" :props="props">
             <q-btn-group push>
-              <q-btn size="sm" color="secondary" push glossy icon="restore">
+              <q-btn
+                size="sm"
+                color="secondary"
+                push
+                glossy
+                icon="restore"
+                @click="restaurarDepartamento(props.row.id)"
+              >
                 <q-tooltip> Restaurar departamento </q-tooltip>
               </q-btn>
               <q-btn

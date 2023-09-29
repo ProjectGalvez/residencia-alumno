@@ -6,7 +6,7 @@ import documentosApi from 'src/api/documentosApi';
 const useEliminarRecurso = (endpoint: string, mensaje: string) => {
   const queryClient = useQueryClient();
 
-  const eliminarRecursoFn = async (id: string | number) => {
+  const eliminarRecursoFn = async (id: string | number | string[]) => {
     try {
       Loading.show({
         delay: 500,
@@ -36,7 +36,7 @@ const useEliminarRecurso = (endpoint: string, mensaje: string) => {
           exact: false,
         });
         queryClient.invalidateQueries({
-          queryKey: [`${resource}_eliminados`],
+          queryKey: [`${resource}-trashed`],
           exact: false,
         });
       },

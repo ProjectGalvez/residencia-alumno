@@ -3,7 +3,7 @@ import { toRef, computed } from 'vue';
 
 interface Props {
   modelValue: boolean;
-  recursoId: string | number;
+  recursoId: string | number | any;
   mensaje?: string;
   icon?: string;
 }
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 const id = toRef(props, 'recursoId');
 
 const emit = defineEmits<{
-  (event: 'eliminar', id: string | number): void;
+  (event: 'eliminar', id: string | number | string[]): void;
   (event: 'update:modelValue', newValue: boolean): void;
 }>();
 
@@ -33,17 +33,14 @@ const emitirEliminar = (id: string | number) => {
     <q-card>
       <q-card-section class="row items-center">
         <q-avatar icon="delete" color="negative" text-color="white" />
-        <span class="q-ml-sm"
-          >¿Estas seguro que quieres eliminar este departamento?</span
-        >
+        <span class="q-ml-sm">{{ props.mensaje }}</span>
       </q-card-section>
 
       <q-card-actions align="right">
         <q-btn flat label="Cancelar" color="primary" v-close-popup />
         <q-btn
-          flat
           label="Aceptar"
-          color="primary"
+          color="negative"
           v-close-popup
           @click="emitirEliminar(id)"
         />

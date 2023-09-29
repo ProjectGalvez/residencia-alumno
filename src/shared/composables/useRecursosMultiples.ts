@@ -18,13 +18,13 @@ const useRecursosMultiples = <T>(
   params?: Record<string, any>,
   options?: any
 ) => {
-  const queryResource = useQuery(
+  const { data, isLoading } = useQuery(
     queryKey,
     () => getResource<T>(endpoint, params),
     options
   );
 
-  return queryResource;
+  return { data, isLoading };
 };
 
 export default useRecursosMultiples;

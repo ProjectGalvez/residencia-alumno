@@ -34,7 +34,7 @@ const useEliminarDepartmento = () => {
           exact: false,
         });
         queryClient.invalidateQueries({
-          queryKey: ['departamentos_eliminados'],
+          queryKey: ['departamentos-trashed'],
           exact: false,
         });
       },

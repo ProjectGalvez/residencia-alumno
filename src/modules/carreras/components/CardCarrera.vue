@@ -65,7 +65,6 @@ const carrera = toRef(props, 'carrera');
             <tr>
               <td>Fecha de registro:</td>
               <td>
-                Hace
                 {{
                   date.formatDate(carrera.departamento.created_at, 'd/MM/YYYY')
                 }}

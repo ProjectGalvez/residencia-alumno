@@ -54,6 +54,9 @@ const errorMessages = computed(() => {
               label-slot
               :rules="[
                 (val) => !!val || 'El nombre del departamento es requerido',
+                (value) =>
+                  (value.length > 3 && value.length < 255) ||
+                  'Debe tener más de 3 caracteres y menos de 255',
               ]"
             >
               <template v-slot:label>
@@ -69,6 +72,9 @@ const errorMessages = computed(() => {
                 (val) =>
                   !!val ||
                   'El nombre del titular del departamento es requerido',
+                (value) =>
+                  (value.length > 3 && value.length < 255) ||
+                  'Debe tener más de 3 caracteres y menos de 255',
               ]"
             >
               <template v-slot:label>
@@ -83,6 +89,9 @@ const errorMessages = computed(() => {
               label-slot
               :rules="[
                 (val) => !!val || 'Los apellidos del titular son requeridos',
+                (value) =>
+                  (value.length > 3 && value.length < 255) ||
+                  'Debe tener más de 3 caracteres y menos de 255',
               ]"
             >
               <template v-slot:label>

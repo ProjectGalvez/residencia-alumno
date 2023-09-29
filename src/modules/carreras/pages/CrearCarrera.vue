@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { Carrera } from 'src/modules/model/Model';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import useCrearCarrera from '../composables/useCrearCarrera';
@@ -11,19 +10,13 @@ const carrera = ref<Carrera>({
   id: 0,
   nombre: '',
   clave: '',
-  departamento_id: 0,
+  departamento_id: '',
   escudo: '',
 });
 
-const router = useRouter();
-
-const { createResource, isLoadingCreate, errorServer, isSuccess } =
-  useCrearCarrera();
+const { createResource, isLoadingCreate, errorServer } = useCrearCarrera();
 const guardar = (carrera: FormData) => {
   createResource(carrera);
-  if (isSuccess) {
-    router.push({ name: 'listar-carrera' });
-  }
 };
 
 const links: Breadcrumb[] = [

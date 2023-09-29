@@ -71,7 +71,7 @@ const routes: RouteRecordRaw[] = [
         name: 'editar-departamento',
       },
 
-      //Usuarios Carreras
+      // Carreras
       {
         path: '/carreras',
         component: () => import('src/modules/carreras/pages/ListarCarrera.vue'),
@@ -91,6 +91,54 @@ const routes: RouteRecordRaw[] = [
         path: '/carreras/:id/editar',
         component: () => import('src/modules/carreras/pages/EditarCarrera.vue'),
         name: 'editar-carrera',
+      },
+
+      // Documentos
+      {
+        path: '/documentos',
+        component: () =>
+          import('src/modules/documentos/pages/ListarDocumento.vue'),
+        name: 'listar-documento',
+      },
+      {
+        path: '/documentos/:id',
+        component: () =>
+          import('src/modules/documentos/pages/VerDocumento.vue'),
+        name: 'ver-documento',
+      },
+      {
+        path: '/documentos/crear',
+        component: () =>
+          import('src/modules/documentos/pages/CrearDocumento.vue'),
+        name: 'crear-documento',
+      },
+      {
+        path: '/documentos/:id/editar',
+        component: () =>
+          import('src/modules/documentos/pages/EditarDocumento.vue'),
+        name: 'editar-documento',
+      },
+
+      // Periodos
+      {
+        path: '/periodos',
+        component: () => import('src/modules/periodos/pages/ListarPeriodo.vue'),
+        name: 'listar-periodo',
+      },
+      {
+        path: '/periodos/:id',
+        component: () => import('src/modules/periodos/pages/VerPeriodo.vue'),
+        name: 'ver-periodo',
+      },
+      {
+        path: '/periodos/crear',
+        component: () => import('src/modules/periodos/pages/CrearPeriodo.vue'),
+        name: 'crear-periodo',
+      },
+      {
+        path: '/periodos/:id/editar',
+        component: () => import('src/modules/periodos/pages/EditarPeriodo.vue'),
+        name: 'editar-periodo',
       },
     ],
   },

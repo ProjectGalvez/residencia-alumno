@@ -13,6 +13,7 @@ const eliminarDepartamento = async (ids: string | string[]) => {
     });
     Loading.hide();
   } catch (e) {
+    Loading.hide();
     throw e;
   }
 };

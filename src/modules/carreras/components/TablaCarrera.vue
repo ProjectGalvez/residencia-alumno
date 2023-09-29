@@ -10,8 +10,7 @@ import { columns } from '../composables/columnasCarreras';
 const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
-const queryCarreras = useObtenerCarreras();
-const { data: carreras, isLoading } = queryCarreras;
+const { data: carreras, isLoading } = useObtenerCarreras();
 
 const verCarrera = (id: string) => {
   router.push({ name: 'ver-carrera', params: { id } });

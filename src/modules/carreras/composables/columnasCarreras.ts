@@ -26,6 +26,5 @@ export const columns: QTableColumn[] = [
     name: 'accion',
     label: 'Acción',
     align: 'right',
-    sortable: true,
   },
 ];

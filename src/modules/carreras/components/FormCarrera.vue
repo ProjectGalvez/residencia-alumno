@@ -25,6 +25,7 @@ const escudoInput = ref<any>(null);
 const emit = defineEmits<{ (event: 'guardar', carrera: FormData): void }>();
 const emitir = () => {
   const saveCarrera = new FormData();
+  saveCarrera.append('id', carrera.value.id + '');
   saveCarrera.append('nombre', carrera.value.nombre);
   saveCarrera.append('clave', carrera.value.clave);
   saveCarrera.append('departamento_id', carrera.value.departamento_id + '');
@@ -82,7 +83,16 @@ const handleFileChange = (event: Event) => {
           </div>
 
           <div class="col-xs-12 col-sm-12">
-            <q-input v-model="carrera.nombre" label-slot>
+            <q-input
+              v-model="carrera.nombre"
+              label-slot
+              :rules="[
+                (val) => !!val || 'El nombre de la carrera es requerido',
+                (value) =>
+                  (value.length > 3 && value.length < 255) ||
+                  'Debe tener más de 3 caracteres y menos de 255',
+              ]"
+            >
               <template v-slot:label>
                 Nombre de la carrera <span class="required-star">*</span>
               </template>
@@ -90,7 +100,16 @@ const handleFileChange = (event: Event) => {
           </div>
 
           <div class="col-xs-12 col-sm-4">
-            <q-input v-model="carrera.clave" label-slot>
+            <q-input
+              v-model="carrera.clave"
+              label-slot
+              :rules="[
+                (val) => !!val || 'La clave de la carrera es requerido',
+                (value) =>
+                  (value.length > 3 && value.length < 50) ||
+                  'Debe tener más de 2 caracteres y menos de 50',
+              ]"
+            >
               <template v-slot:label>
                 Clave de la carrera <span class="required-star">*</span>
               </template>
@@ -106,6 +125,7 @@ const handleFileChange = (event: Event) => {
               option-label="nombre"
               emit-value
               map-options
+              :rules="[(val) => !!val || 'Selecciona un departamento']"
             >
               <template v-slot:label>
                 Selecciona un departamento <span class="required-star">*</span>
