@@ -63,8 +63,9 @@ const useActulizarRecursoJson = <T extends { id: number | string }>(
 
   const actualizarRecurso = async (data: T) => {
     try {
-      const { data: responseData } = await documentosApi.post<T>(
-        `${endpoint}/${data.id}`
+      const { data: responseData } = await documentosApi.patch<T>(
+        `${endpoint}/${data.id}`,
+        data
       );
       return responseData;
     } catch (error) {

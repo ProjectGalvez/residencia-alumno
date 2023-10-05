@@ -1,54 +1,56 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useObtenerPeriodos from '../composables/useObtenerPeriodos';
-import useEliminarPeriodo from '../composables/useEliminarPeriodo';
-import { columnasPeriodos as columns } from '../composables/columnasPeriodos';
+import useObtenerUsers from '../composables/useObtenerUsers';
+import { columnasUsers as columns } from '../composables/columnasUsuarios';
 import DialogEliminar from 'src/shared/components/DialogEliminar.vue';
+import useEliminarUser from '../composables/useEliminarUser';
 
 const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
 
-const { data: periodos, isLoading } = useObtenerPeriodos();
-const { eliminarRecurso: eliminarPeriodo } = useEliminarPeriodo();
+const { data: users, isLoading } = useObtenerUsers();
+const { eliminarRecurso: eliminarUser } = useEliminarUser();
 
-const verPeriodo = (id: string) => {
-  router.push({ name: 'ver-periodo', params: { id } });
+const verUser = (id: string) => {
+  router.push({ name: 'ver-usuario', params: { id } });
 };
-const editarPeriodo = (id: string) => {
-  router.push({ name: 'editar-periodo', params: { id } });
+const editarUser = (id: string) => {
+  router.push({ name: 'editar-usuario', params: { id } });
 };
 const eliminar = (id: string) => {
   confirm.value = true;
   recursoId.value = id;
 };
 </script>
+
 <template>
   <div>
     <DialogEliminar
       v-model="confirm"
       :recurso-id="recursoId"
-      @eliminar="eliminarPeriodo"
+      @eliminar="eliminarUser"
     />
     <q-table
       flat
       bordered
-      :rows="periodos"
+      :rows="users"
       :columns="columns"
-      row-key="nombre"
+      row-key="name"
       :loading="isLoading"
       :pagination="{ rowsPerPage: 15 }"
     >
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="nombre" :props="props">{{ props.row.nombre }}</q-td>
-          <q-td key="fecha_inicio" :props="props">{{
-            props.row.fecha_inicio
-          }}</q-td>
-          <q-td key="fecha_termino" :props="props">{{
-            props.row.fecha_termino
-          }}</q-td>
+          <q-td key="name" :props="props">{{ props.row.name }}</q-td>
+          <q-td key="email" :props="props">{{ props.row.email }}</q-td>
+          <q-td key="rol" :props="props">
+            <div v-if="props.row.roles && props.row.roles.length > 0">
+              {{ props.row.roles[0].name }}
+            </div>
+            <div v-else>Sin rol</div>
+          </q-td>
           <q-td key="accion" :props="props">
             <q-btn-group push>
               <q-btn
@@ -57,7 +59,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="visibility"
-                @click="verPeriodo(props.row.id)"
+                @click="verUser(props.row.id)"
               />
               <q-btn
                 size="sm"
@@ -65,7 +67,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="edit"
-                @click="editarPeriodo(props.row.id)"
+                @click="editarUser(props.row.id)"
               />
               <q-btn
                 size="sm"

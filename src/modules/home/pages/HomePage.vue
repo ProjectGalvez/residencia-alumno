@@ -31,11 +31,13 @@ const irAdministracion = () => {
           <div class="text-h3 text-weight-medium">DDEP - ITT</div>
           <div class="q-gutter-sm">
             <q-btn
+              v-if="usuario"
               color="primary"
               label="Administrar"
               @click="irAdministracion"
             />
             <q-btn
+              v-else
               color="primary"
               label="Iniciar sesión"
               :to="{ name: 'login' }"

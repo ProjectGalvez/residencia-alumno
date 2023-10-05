@@ -1,40 +1,41 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useObtenerPeriodos from '../composables/useObtenerPeriodos';
-import useEliminarPeriodo from '../composables/useEliminarPeriodo';
-import { columnasPeriodos as columns } from '../composables/columnasPeriodos';
 import DialogEliminar from 'src/shared/components/DialogEliminar.vue';
+import useObtenerEmpresas from '../composables/useObtenerEmpresas';
+import useEliminarEmpresa from '../composables/useEliminarEmpresa';
+import { columnasEmpresas as columns } from '../composables/columnasEmpresas';
 
 const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
 
-const { data: periodos, isLoading } = useObtenerPeriodos();
-const { eliminarRecurso: eliminarPeriodo } = useEliminarPeriodo();
+const { data: empresas, isLoading } = useObtenerEmpresas();
+const { eliminarRecurso: eliminarEmpresa } = useEliminarEmpresa();
 
-const verPeriodo = (id: string) => {
-  router.push({ name: 'ver-periodo', params: { id } });
+const verEmpresa = (id: string) => {
+  router.push({ name: 'ver-empresa', params: { id } });
 };
-const editarPeriodo = (id: string) => {
-  router.push({ name: 'editar-periodo', params: { id } });
+const editarEmpresa = (id: string) => {
+  router.push({ name: 'editar-empresa', params: { id } });
 };
 const eliminar = (id: string) => {
   confirm.value = true;
   recursoId.value = id;
 };
 </script>
+
 <template>
   <div>
     <DialogEliminar
       v-model="confirm"
       :recurso-id="recursoId"
-      @eliminar="eliminarPeriodo"
+      @eliminar="eliminarEmpresa"
     />
     <q-table
       flat
       bordered
-      :rows="periodos"
+      :rows="empresas"
       :columns="columns"
       row-key="nombre"
       :loading="isLoading"
@@ -43,12 +44,10 @@ const eliminar = (id: string) => {
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="nombre" :props="props">{{ props.row.nombre }}</q-td>
-          <q-td key="fecha_inicio" :props="props">{{
-            props.row.fecha_inicio
-          }}</q-td>
-          <q-td key="fecha_termino" :props="props">{{
-            props.row.fecha_termino
-          }}</q-td>
+          <q-td key="giro" :props="props">{{ props.row.giro }}</q-td>
+          <q-td key="telefono" :props="props">{{ props.row.telefono }}</q-td>
+          <q-td key="domicilio" :props="props">{{ props.row.domicilio }}</q-td>
+          <q-td key="titular" :props="props">{{ props.row.titular }}</q-td>
           <q-td key="accion" :props="props">
             <q-btn-group push>
               <q-btn
@@ -57,7 +56,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="visibility"
-                @click="verPeriodo(props.row.id)"
+                @click="verEmpresa(props.row.id)"
               />
               <q-btn
                 size="sm"
@@ -65,7 +64,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="edit"
-                @click="editarPeriodo(props.row.id)"
+                @click="editarEmpresa(props.row.id)"
               />
               <q-btn
                 size="sm"

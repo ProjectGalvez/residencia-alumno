@@ -10,7 +10,7 @@ const links1 = [
 ];
 
 const links2 = [
-  { icon: 'domain', text: 'Empresas', to: '' },
+  { icon: 'domain', text: 'Empresas', to: 'listar-empresa' },
   { icon: 'date_range', text: 'Periodos', to: 'listar-periodo' },
   { icon: 'description', text: 'Documentos', to: 'listar-documento' },
   { icon: 'local_library', text: 'Carreras', to: 'listar-carrera' },

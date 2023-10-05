@@ -11,9 +11,10 @@ const useCrearRecursoJson = <T>(endpoint: string, to: string) => {
 
   const createResourceJSON = async (data: T) => {
     try {
+      console.log('En el json', data);
       const { data: responseData } = await documentosApi.post<T>(
         endpoint,
-        JSON.stringify(data)
+        data
       );
       return responseData;
     } catch (error) {

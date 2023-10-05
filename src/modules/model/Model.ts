@@ -38,8 +38,42 @@ export interface Documento {
 export interface Periodo {
   id: number;
   nombre: string;
-  fecha_inicio: Date | null;
-  fecha_termino: Date | null;
+  fecha_inicio: Date | null | string;
+  fecha_termino: Date | null | string;
+  activo: number | boolean;
   created_at?: Date;
   updated_at?: Date;
+}
+export interface Empresa {
+  id: string;
+  nombre: string;
+  giro: string;
+  rfc?: string;
+  domicilio: string;
+  colonia: string;
+  cp?: string;
+  ciudad?: string;
+  telefono?: string;
+  mision?: string;
+  titular: string;
+  titular_puesto: string;
+  asesor_externo?: string;
+  asesor_externo_puesto?: string;
+  nombre_firmara?: string;
+  nombre_firmara_puesto?: string;
+  created_at?: Date | string | null;
+  updated_at?: Date | string | null;
+}
+export interface User {
+  email: string;
+  id: string;
+  img_portada?: string;
+  img_foto?: string;
+  name: string;
+  roles?: Role[];
+}
+
+export interface Role {
+  id: number;
+  name: string;
 }

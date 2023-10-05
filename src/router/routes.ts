@@ -140,6 +140,28 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/modules/periodos/pages/EditarPeriodo.vue'),
         name: 'editar-periodo',
       },
+
+      // Empresas
+      {
+        path: '/empresas',
+        component: () => import('src/modules/empresas/pages/ListarEmpresa.vue'),
+        name: 'listar-empresa',
+      },
+      {
+        path: '/empresas/:id',
+        component: () => import('src/modules/empresas/pages/VerEmpresa.vue'),
+        name: 'ver-empresa',
+      },
+      {
+        path: '/empresas/crear',
+        component: () => import('src/modules/empresas/pages/CrearEmpresa.vue'),
+        name: 'crear-empresa',
+      },
+      {
+        path: '/empresas/:id/editar',
+        component: () => import('src/modules/empresas/pages/EditarEmpresa.vue'),
+        name: 'editar-empresa',
+      },
     ],
   },
   {

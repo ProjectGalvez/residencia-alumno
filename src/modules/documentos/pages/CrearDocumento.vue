@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import { Documento } from 'src/modules/model/Model';
