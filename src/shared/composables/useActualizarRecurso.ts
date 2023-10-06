@@ -12,7 +12,6 @@ const useActulizarRecursoFormData = <T>(endpoint: string, to: string) => {
   const actualizarRecurso = async (data: FormData) => {
     try {
       data.append('_method', 'PUT');
-      console.log(data.get('fecha_limite'));
       const { data: responseData } = await documentosApi.post<T>(
         `${endpoint}/${data.get('id')}`,
         data,

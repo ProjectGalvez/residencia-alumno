@@ -4,6 +4,7 @@ import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import { getRol } from 'src/shared/helpers/getUser';
 import TablaUsers from '../components/TablaUsers.vue';
+import TablaUserEliminado from '../components/TablaUserEliminado.vue';
 
 const router = useRouter();
 const crearUser = () => {
@@ -31,6 +32,15 @@ const links: Breadcrumb[] = [{ label: 'Usuarios', icon: 'people' }];
       </q-card-section>
       <q-card-section>
         <TablaUsers />
+      </q-card-section>
+    </q-card>
+
+    <q-card class="q-mt-md" v-if="rol === 'admin'">
+      <q-card-section>
+        <div class="fontsize-15 text-weight-light">Usuarios eliminados</div>
+      </q-card-section>
+      <q-card-section>
+        <TablaUserEliminado />
       </q-card-section>
     </q-card>
   </q-page>

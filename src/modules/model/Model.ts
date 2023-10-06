@@ -67,10 +67,12 @@ export interface Empresa {
 export interface User {
   email: string;
   id: string;
-  img_portada?: string;
-  img_foto?: string;
+  url_portada?: string;
+  url_foto?: string;
   name: string;
   roles?: Role[];
+  password?: string;
+  rol?: string;
 }
 
 export interface Role {

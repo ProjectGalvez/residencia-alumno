@@ -20,7 +20,14 @@ const links2 = [
 const links3 = [{ icon: '', text: 'Configuración' }];
 
 const isActive = (routeName: string) => {
-  return route.name === routeName;
+  return isRouteActive(routeName);
+};
+
+const isRouteActive = (routeName: string) => {
+  return (
+    route.name &&
+    (route.name === routeName || route.name.startsWith(routeName + '.'))
+  );
 };
 </script>
 <template>

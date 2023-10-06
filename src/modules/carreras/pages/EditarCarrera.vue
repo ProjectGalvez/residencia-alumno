@@ -17,9 +17,6 @@ const { actalizarRecurso, isLoadingActualizar, isSuccess, errorServer } =
 
 const guardar = (carrera: FormData) => {
   actalizarRecurso(carrera);
-  if (isSuccess) {
-    router.push({ name: 'listar-carrera' });
-  }
 };
 const links: Breadcrumb[] = [
   {
@@ -27,7 +24,7 @@ const links: Breadcrumb[] = [
     icon: 'local_library',
     to: 'listar-carrera',
   },
-  { label: 'Editar carrera', icon: 'add_circle_outline' },
+  { label: 'Editar carrera', icon: 'edit' },
 ];
 </script>
 <template>

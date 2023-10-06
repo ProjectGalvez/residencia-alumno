@@ -142,7 +142,7 @@ const errorMessages = computed(() => {
           </div>
 
           <div class="col-xs-12 col-sm-12">
-            <q-input v-model="empresa.mision" label-slot>
+            <q-input v-model="empresa.mision" label-slot type="textarea">
               <template v-slot:label> Misión </template>
             </q-input>
           </div>
