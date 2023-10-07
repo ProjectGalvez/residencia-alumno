@@ -41,11 +41,38 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/usuarios/:id/editar',
-        component: () => import('src/modules/user/pages/EditarUsuario.vue'),
+        component: () =>
+          import('src/modules/estudiantes/pages/EditarUsuario.vue'),
         name: 'editar-usuario',
       },
 
-      //Usuarios Departamentos
+      //Estudiantes
+      {
+        path: '/estudiantes',
+        component: () =>
+          import('src/modules/estudiantes/pages/ListarEstudiante.vue'),
+        name: 'listar-estudiante',
+      },
+      {
+        path: '/estudiantes/:id',
+        component: () =>
+          import('src/modules/estudiantes/pages/VerEstudiante.vue'),
+        name: 'ver-estudiante',
+      },
+      {
+        path: '/estudiantes/crear',
+        component: () =>
+          import('src/modules/estudiantes/pages/CrearEstudiante.vue'),
+        name: 'crear-estudiante',
+      },
+      {
+        path: '/estudiantes/:id/editar',
+        component: () =>
+          import('src/modules/estudiantes/pages/EditarEstudiante.vue'),
+        name: 'editar-estudiante',
+      },
+
+      //Departamentos
       {
         path: '/departamentos',
         component: () =>

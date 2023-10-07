@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
-import { Empresa, Periodo } from 'src/modules/model/Model';
+import { Empresa } from 'src/modules/model/Model';
 import useVerEmpresa from '../composables/useVerEmpresa';
 import useActualizarEmpresa from '../composables/useActualizarEmpresa';
 import FormEmpresa from '../components/FormEmpresa.vue';
@@ -23,7 +23,7 @@ const links: Breadcrumb[] = [
     icon: 'domain',
     to: 'listar-empresa',
   },
-  { label: 'Editar empresa', icon: 'add_circle_outline' },
+  { label: 'Editar empresa', icon: 'edit' },
 ];
 </script>
 <template>

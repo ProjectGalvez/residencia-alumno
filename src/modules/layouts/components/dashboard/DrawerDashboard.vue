@@ -6,7 +6,7 @@ const links1 = [
   { icon: 'analytics', text: 'Dashboard', to: 'dashboard-home' },
   { icon: 'assignment_turned_in', text: 'Entregas', to: '' },
   { icon: 'people', text: 'Usuarios', to: 'listar-usuario' },
-  { icon: 'school', text: 'Estudiantes', to: '' },
+  { icon: 'school', text: 'Estudiantes', to: 'listar-estudiante' },
 ];
 
 const links2 = [
@@ -20,13 +20,9 @@ const links2 = [
 const links3 = [{ icon: '', text: 'Configuración' }];
 
 const isActive = (routeName: string) => {
-  return isRouteActive(routeName);
-};
-
-const isRouteActive = (routeName: string) => {
   return (
-    route.name &&
-    (route.name === routeName || route.name.startsWith(routeName + '.'))
+    route.name === routeName ||
+    (route.name?.toString() + '').startsWith(routeName)
   );
 };
 </script>

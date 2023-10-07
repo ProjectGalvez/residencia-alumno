@@ -17,7 +17,7 @@ const loading = toRef(props, 'loading');
 const errorServer = toRef(props, 'errorServer');
 const errorServerValue = errorServer.value as ServerValidationError | null;
 
-const emit = defineEmits<{ (event: 'guardar', periodo: Empresa): void }>();
+const emit = defineEmits<{ (event: 'guardar', empresa: Empresa): void }>();
 const emitir = () => {
   emit('guardar', empresa.value);
 };

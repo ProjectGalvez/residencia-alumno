@@ -79,3 +79,23 @@ export interface Role {
   id: number;
   name: string;
 }
+
+export interface Estudiante {
+  id: string;
+  user_id: string;
+  carrera_id: number | null;
+  nombre: string;
+  apellidos: string;
+  numero_control: string;
+  domicilio?: string;
+  email: string;
+  seguridad_social?: string;
+  no_seguridad_social?: string | null;
+  ciudad?: string;
+  telefono?: string;
+  password: string;
+  created_at?: Date | string | null;
+  updated_at?: Date | string | null;
+  user?: User;
+  carrera?: Carrera;
+}
