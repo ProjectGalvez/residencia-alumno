@@ -11,6 +11,7 @@ const props = defineProps<{
   loading: boolean;
   errorServer?: ServerValidationError | unknown | null;
 }>();
+
 const periodo = toRef(props, 'periodo');
 const loading = toRef(props, 'loading');
 const errorServer = toRef(props, 'errorServer');
@@ -72,13 +73,13 @@ const errorMessages = computed(() => {
 
           <div class="col-xs-12 col-sm-6">
             <q-input
-              v-model="fechaTermino"
+              v-model="fechaInicio"
               mask="date"
               :rules="[(val) => !!val || 'La fecha de termino es requerido']"
               label-slot
             >
               <template v-slot:label>
-                Fecha de termino del periodo
+                Fecha de inicio del periodo
                 <span class="required-star">*</span>
               </template>
               <template v-slot:append>
@@ -88,7 +89,7 @@ const errorMessages = computed(() => {
                     transition-show="scale"
                     transition-hide="scale"
                   >
-                    <q-date v-model="fechaTermino">
+                    <q-date v-model="fechaInicio">
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup
@@ -106,7 +107,7 @@ const errorMessages = computed(() => {
 
           <div class="col-xs-12 col-sm-6">
             <q-input
-              v-model="fechaInicio"
+              v-model="fechaTermino"
               mask="date"
               :rules="[(val) => !!val || 'La fecha de termino requerida']"
               label-slot
@@ -122,7 +123,7 @@ const errorMessages = computed(() => {
                     transition-show="scale"
                     transition-hide="scale"
                   >
-                    <q-date v-model="fechaInicio">
+                    <q-date v-model="fechaTermino">
                       <div class="row items-center justify-end">
                         <q-btn
                           v-close-popup

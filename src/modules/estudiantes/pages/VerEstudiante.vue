@@ -14,6 +14,8 @@ const {
   error,
 } = useVerEstudianteFull(id + '');
 
+console.log(estudiante.value);
+
 const links: Breadcrumb[] = [
   { label: 'Estudiantes', icon: 'school', to: 'listar-estudiante' },
   { label: 'Ver estudiante', icon: 'visibility' },

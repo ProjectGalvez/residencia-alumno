@@ -93,9 +93,11 @@ export interface Estudiante {
   no_seguridad_social?: string | null;
   ciudad?: string;
   telefono?: string;
-  password: string;
+  password?: string;
   created_at?: Date | string | null;
   updated_at?: Date | string | null;
   user?: User;
   carrera?: Carrera;
+  empresas?: Empresa[];
+  periodos: Periodo[];
 }

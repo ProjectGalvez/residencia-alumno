@@ -10,7 +10,7 @@ const useVerEstudianteFull = (id: string) => {
       staleTime: 1000 * 60 * 60,
     },
     {
-      included: 'user,carrera,empresas',
+      included: 'user,carrera,empresas,periodos',
     }
   );
 };

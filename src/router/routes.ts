@@ -48,6 +48,12 @@ const routes: RouteRecordRaw[] = [
 
       //Estudiantes
       {
+        path: '/asignarresidencia/:id',
+        component: () =>
+          import('src/modules/estudiantes/pages/AsignarResidencia.vue'),
+        name: 'asignar-residencia',
+      },
+      {
         path: '/estudiantes',
         component: () =>
           import('src/modules/estudiantes/pages/ListarEstudiante.vue'),
