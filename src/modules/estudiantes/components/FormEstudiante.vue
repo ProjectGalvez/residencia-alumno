@@ -19,18 +19,62 @@ const estudiante = toRef(props, 'estudiante');
 const loading = toRef(props, 'loading');
 const errorServer = toRef(props, 'errorServer');
 const errorServerValue = errorServer.value as ServerValidationError | null;
+const perfilInput = ref<any>(null);
+let imageUrl = ref(estudiante.value.user?.url_foto || null);
 
 const emit = defineEmits<{
-  (event: 'guardar', estudiante: Estudiante): void;
+  (event: 'guardar', estudiante: FormData): void;
 }>();
 const emitir = () => {
-  emit('guardar', estudiante.value);
+  const estudianteForm = new FormData();
+  estudianteForm.append('id', estudiante.value.id);
+  estudianteForm.append('nombre', estudiante.value.nombre);
+  estudianteForm.append('apellidos', estudiante.value.apellidos);
+  estudianteForm.append('numero_control', estudiante.value.numero_control);
+  estudianteForm.append('telefono', estudiante.value.telefono + '');
+  estudianteForm.append('email', estudiante.value.email);
+  estudianteForm.append('carrera_id', estudiante.value.carrera_id + '');
+  estudianteForm.append(
+    'seguridad_social',
+    estudiante.value.seguridad_social + ''
+  );
+  estudianteForm.append(
+    'no_seguridad_social',
+    estudiante.value.no_seguridad_social + ''
+  );
+  estudianteForm.append('domicilio', estudiante.value.domicilio + '');
+  estudianteForm.append('password', estudiante.value.password + '');
+  if (perfilInput.value != null) {
+    estudianteForm.append('url_foto', perfilInput.value[0]);
+  }
+
+  emit('guardar', estudianteForm);
 };
 const errorMessages = computed(() => {
   return generateErrorMessages(
     errorServer.value as ServerValidationError | null
   );
 });
+
+const previewImage = () => {
+  if (perfilInput.value) {
+    imageUrl.value = URL.createObjectURL(perfilInput.value[0]);
+  }
+};
+
+const closeImg = () => {
+  imageUrl.value = '';
+  perfilInput.value = null;
+};
+
+const handleFileChange = (event: Event) => {
+  const fileInput = event.target as HTMLInputElement;
+  const image = fileInput.files?.[0] || null;
+  perfilInput.value = fileInput.files?.[0] || null;
+  if (image) {
+    imageUrl.value = URL.createObjectURL(image);
+  }
+};
 </script>
 
 <template>
@@ -128,7 +172,11 @@ const errorMessages = computed(() => {
               </div>
 
               <div class="col-xs-12 col-sm-6">
-                <q-input v-model="estudiante.telefono" label-slot>
+                <q-input
+                  v-model="estudiante.telefono"
+                  label-slot
+                  mask="(###) ### - ####"
+                >
                   <template v-slot:label> Teléfono: </template>
                 </q-input>
               </div>
@@ -206,6 +254,36 @@ const errorMessages = computed(() => {
               >
                 <template v-slot:label> Contraseña: </template>
               </q-input>
+            </div>
+            <div>
+              <q-file
+                bottom-slots
+                v-model="perfilInput"
+                label-slot
+                counter
+                multiple
+                accept=".jpg, image/*"
+                @update:model-value="previewImage"
+                @change="handleFileChange"
+              >
+                <template v-slot:label> Imagen de perfil: </template>
+
+                <template v-slot:prepend>
+                  <q-icon name="cloud_upload" @click.stop.prevent />
+                </template>
+
+                <template v-slot:append>
+                  <q-icon
+                    name="close"
+                    @click.stop.prevent="closeImg"
+                    class="cursor-pointer"
+                  />
+                </template>
+              </q-file>
+
+              <div>
+                <q-img v-if="imageUrl" :src="imageUrl" alt="Perfil" />
+              </div>
             </div>
           </div>
         </div>

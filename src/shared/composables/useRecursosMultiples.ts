@@ -1,7 +1,6 @@
 import documentosApi from 'src/api/documentosApi';
 import { useQuery } from '@tanstack/vue-query';
 
-// Define una función genérica para obtener recursos con parámetros
 const getResource = async <T>(
   endpoint: string,
   params?: Record<string, any>

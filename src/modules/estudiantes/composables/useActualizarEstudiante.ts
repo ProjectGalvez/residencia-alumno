@@ -1,8 +1,8 @@
 import { Estudiante } from 'src/modules/model/Model';
-import { useActulizarRecursoJson } from 'src/shared/composables/useActualizarRecurso';
+import { useActulizarRecursoFormData } from 'src/shared/composables/useActualizarRecurso';
 
 const useActualizarEstudiante = () => {
-  return useActulizarRecursoJson<Estudiante>(
+  return useActulizarRecursoFormData<Estudiante>(
     '/estudiantes',
     'listar-estudiante'
   );

@@ -8,9 +8,10 @@ import { useRouter } from 'vue-router';
 const useActulizarRecursoFormData = <T>(endpoint: string, to: string) => {
   const queryClient = useQueryClient();
   const errorServer = ref<ServerValidationError | unknown | null>(null);
-
+  let idEdit: any;
   const actualizarRecurso = async (data: FormData) => {
     try {
+      idEdit = data.get('id');
       data.append('_method', 'PUT');
       const { data: responseData } = await documentosApi.post<T>(
         `${endpoint}/${data.get('id')}`,
@@ -32,6 +33,10 @@ const useActulizarRecursoFormData = <T>(endpoint: string, to: string) => {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: [resourceName],
+          exact: false,
+        });
+        queryClient.invalidateQueries({
+          queryKey: [resourceName, idEdit],
           exact: false,
         });
         router.push({ name: to });

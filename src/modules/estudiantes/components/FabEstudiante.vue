@@ -10,8 +10,11 @@ const id = toRef(props, 'id');
 const asignarResidencia = () => {
   router.push({ name: 'asignar-residencia', params: { id: id.value } });
 };
-const onClick = () => {
-  console.log('Goilas');
+const asignarDocumento = () => {
+  router.push({ name: 'asignar-documento', params: { id: id.value } });
+};
+const editar = () => {
+  router.push({ name: 'editar-estudiante', params: { id: id.value } });
 };
 </script>
 
@@ -35,14 +38,15 @@ const onClick = () => {
     <q-fab-action
       label-position="left"
       color="secondary"
-      @click="onClick"
+      @click="editar"
       icon="edit"
       label="Editar"
     />
     <q-fab-action
+      v-if="isResidente"
       label-position="left"
       color="orange"
-      @click="onClick"
+      @click="asignarDocumento"
       icon="post_add"
       label="Agregar documentos"
     />

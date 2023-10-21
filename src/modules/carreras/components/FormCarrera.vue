@@ -27,6 +27,8 @@ const emitir = () => {
   const saveCarrera = new FormData();
   saveCarrera.append('id', carrera.value.id + '');
   saveCarrera.append('nombre', carrera.value.nombre);
+  saveCarrera.append('abrev', carrera.value.abrev + '');
+  saveCarrera.append('color', carrera.value.color + '');
   saveCarrera.append('clave', carrera.value.clave);
   saveCarrera.append('departamento_id', carrera.value.departamento_id + '');
   if (escudoInput.value) {
@@ -82,7 +84,7 @@ const handleFileChange = (event: Event) => {
             </q-banner>
           </div>
 
-          <div class="col-xs-12 col-sm-12">
+          <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="carrera.nombre"
               label-slot
@@ -95,6 +97,28 @@ const handleFileChange = (event: Event) => {
             >
               <template v-slot:label>
                 Nombre de la carrera <span class="required-star">*</span>
+              </template>
+            </q-input>
+          </div>
+
+          <div class="col-xs-12 col-sm-3">
+            <q-input v-model="carrera.abrev" label-slot>
+              <template v-slot:label> Abreviación </template>
+            </q-input>
+          </div>
+
+          <div class="col-xs-12 col-sm-3">
+            <q-input v-model="carrera.color" class="my-input" label="Color">
+              <template v-slot:append>
+                <q-icon name="colorize" class="cursor-pointer">
+                  <q-popup-proxy
+                    cover
+                    transition-show="scale"
+                    transition-hide="scale"
+                  >
+                    <q-color v-model="carrera.color" />
+                  </q-popup-proxy>
+                </q-icon>
               </template>
             </q-input>
           </div>

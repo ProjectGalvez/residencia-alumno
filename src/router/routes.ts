@@ -48,6 +48,12 @@ const routes: RouteRecordRaw[] = [
 
       //Estudiantes
       {
+        path: '/asignardocumento/:id',
+        component: () =>
+          import('src/modules/estudiantes/pages/AgregarDocumento.vue'),
+        name: 'asignar-documento',
+      },
+      {
         path: '/asignarresidencia/:id',
         component: () =>
           import('src/modules/estudiantes/pages/AsignarResidencia.vue'),
@@ -76,6 +82,28 @@ const routes: RouteRecordRaw[] = [
         component: () =>
           import('src/modules/estudiantes/pages/EditarEstudiante.vue'),
         name: 'editar-estudiante',
+      },
+
+      //Entregas
+      {
+        path: '/entregas',
+        component: () => import('src/modules/entregas/pages/ListarEntrega.vue'),
+        name: 'listar-entrega',
+      },
+      {
+        path: '/entregas/:id',
+        component: () => import('src/modules/entregas/pages/VerEntrega.vue'),
+        name: 'ver-entrega',
+      },
+      {
+        path: '/entregas/crear',
+        component: () => import('src/modules/entregas/pages/CrearEntrega.vue'),
+        name: 'crear-entrega',
+      },
+      {
+        path: '/entregas/:id/editar',
+        component: () => import('src/modules/entregas/pages/EditarEntrega.vue'),
+        name: 'editar-entrega',
       },
 
       //Departamentos

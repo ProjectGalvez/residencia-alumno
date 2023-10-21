@@ -1,9 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
-import { Loading } from 'quasar';
-import { Notify } from 'quasar';
+import { Loading, Notify } from 'quasar';
 import documentosApi from 'src/api/documentosApi';
 
-const useEliminarRecurso = (endpoint: string, mensaje: string) => {
+const useEliminarEntrega = (page: number) => {
   const queryClient = useQueryClient();
 
   const eliminarRecursoFn = async (id: string | number | string[]) => {
@@ -12,7 +11,7 @@ const useEliminarRecurso = (endpoint: string, mensaje: string) => {
         delay: 500,
         message: 'Eliminando...',
       });
-      await documentosApi.delete(`${endpoint}/${id}`);
+      await documentosApi.delete(`entregas/${id}`);
       Loading.hide();
     } catch (error) {
       Loading.hide();
@@ -20,22 +19,21 @@ const useEliminarRecurso = (endpoint: string, mensaje: string) => {
     }
   };
 
-  const resource = endpoint.replace(/^\//, '');
   const { mutate, isLoading, error, isSuccess } = useMutation(
     eliminarRecursoFn,
     {
       onSuccess: () => {
         Notify.create({
-          message: mensaje,
+          message: 'Se eliminó la entrega',
           color: 'positive',
           position: 'top-right',
           type: 'positive',
         });
         queryClient.invalidateQueries({
-          queryKey: [resource],
+          queryKey: ['entregas', page],
         });
         queryClient.invalidateQueries({
-          queryKey: [`${resource}-trashed`],
+          queryKey: ['entregas-trashed'],
           exact: false,
         });
       },
@@ -57,5 +55,4 @@ const useEliminarRecurso = (endpoint: string, mensaje: string) => {
     isSuccess,
   };
 };
-
-export default useEliminarRecurso;
+export default useEliminarEntrega;

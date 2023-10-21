@@ -90,7 +90,11 @@ const errorMessages = computed(() => {
           </div>
 
           <div class="col-xs-12 col-sm-2">
-            <q-input v-model="empresa.telefono" label-slot>
+            <q-input
+              v-model="empresa.telefono"
+              label-slot
+              mask="(###) ### - ####"
+            >
               <template v-slot:label> Teléfono </template>
             </q-input>
           </div>

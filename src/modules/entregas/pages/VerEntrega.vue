@@ -3,27 +3,27 @@ import { useRoute } from 'vue-router';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
-import useVerEstudianteFull from '../composables/useVerEstudianteFull';
-import CardEstudiante from '../components/CardEstudiante.vue';
+import useVerEntrega from '../composables/useVerEntrega';
+import CardEntrega from '../components/CardEntrega.vue';
 
 const route = useRoute();
 const { id = '' } = route.params;
-const {
-  resource: estudiante,
-  isLoading,
-  error,
-} = useVerEstudianteFull(id + '');
+const { resource: entrega, isLoading, error } = useVerEntrega(id + '');
 
 const links: Breadcrumb[] = [
-  { label: 'Estudiantes', icon: 'school', to: 'listar-estudiante' },
-  { label: 'Ver estudiante', icon: 'visibility' },
+  {
+    label: 'Entregas',
+    icon: 'assignment_turned_in',
+    to: 'listar-entrega',
+  },
+  { label: 'Ver entrega', icon: 'visibility' },
 ];
 </script>
 <template>
   <q-page padding>
-    <breadcrumb-nav :pages="links" titlePage="Ver Estudiante" />
+    <breadcrumb-nav :pages="links" titlePage="Ver entrega" />
     <LoaderSpinner v-if="isLoading" />
-    <card-estudiante v-else-if="estudiante" :estudiante="estudiante" />
+    <CardEntrega v-else-if="entrega" :entrega="entrega" />
     <div v-else>{{ error }}</div>
   </q-page>
 </template>

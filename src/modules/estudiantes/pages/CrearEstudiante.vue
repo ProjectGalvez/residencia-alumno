@@ -20,10 +20,11 @@ const estudiante = ref<Estudiante>({
   ciudad: '',
   telefono: '',
   password: '',
+  url_foto: '',
 });
 
 const { createResource, isLoadingCreate, errorServer } = useCrearEstudiante();
-const guardar = (estudiante: Estudiante) => {
+const guardar = (estudiante: FormData) => {
   createResource(estudiante);
 };
 
@@ -38,7 +39,7 @@ const links: Breadcrumb[] = [
 </script>
 <template>
   <q-page padding>
-    <breadcrumb-nav :pages="links" titlePage="Registrar empresa" />
+    <breadcrumb-nav :pages="links" titlePage="Registrar estudiante" />
     <form-estudiante
       :estudiante="estudiante"
       :loading="isLoadingCreate"

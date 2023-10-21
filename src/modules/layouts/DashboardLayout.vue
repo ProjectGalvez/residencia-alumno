@@ -19,7 +19,7 @@ const usuario = JSON.parse(usuarioString);
 </script>
 
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hHh LpR fFf">
     <q-header elevated class="bg-primary text-white" height-hint="64">
       <q-toolbar class="GNL__toolbar">
         <q-btn

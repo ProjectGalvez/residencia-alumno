@@ -21,6 +21,8 @@ export interface Carrera {
   nombre: string;
   escudo: string;
   clave: string;
+  color?: string;
+  abrev?: string;
   created_at?: Date;
   updated_at?: Date;
   departamento?: Departamento;
@@ -94,10 +96,43 @@ export interface Estudiante {
   ciudad?: string;
   telefono?: string;
   password?: string;
+  url_foto?: string;
   created_at?: Date | string | null;
   updated_at?: Date | string | null;
   user?: User;
   carrera?: Carrera;
   empresas?: Empresa[];
-  periodos: Periodo[];
+  periodos?: Periodo[];
+}
+
+export interface Entrega {
+  id: string;
+  estudiante?: Estudiante;
+  documento?: Documento;
+  url_documento: null;
+  fecha_entrega: Date | string | null;
+  estado?: boolean;
+  documento_id: number;
+  estudiante_id: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface CarreraNumeroResidente {
+  carrera_id: number;
+  carrera: string;
+  numero_estudiantes: number;
+  color?: string;
+  escudo?: string;
+}
+
+export interface Tabla {
+  estudiantes: Estudiante[];
+  documentos: Documento[];
+  data: { [key: string]: { [key: string]: number } };
+}
+
+export interface AutocompletarEstudiante {
+  estudiante_id: string;
+  nombre_completo: string;
 }

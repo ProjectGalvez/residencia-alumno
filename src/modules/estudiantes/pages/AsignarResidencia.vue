@@ -31,7 +31,6 @@ const onFilterTest = async (val, update /* abort */) => {
     params: { nombre: nombre },
   });
   let list = response.data;
-  console.log(response.data);
   if (val) {
     const needle = val.toLowerCase();
     list = response.data.filter((x) => x.nombre.toLowerCase().includes(needle));

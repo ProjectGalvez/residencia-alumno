@@ -8,6 +8,9 @@ const useVerEstudiante = (id: string) => {
     ['estudiantes', id],
     {
       staleTime: 1000 * 60 * 60,
+    },
+    {
+      included: 'user',
     }
   );
 };
