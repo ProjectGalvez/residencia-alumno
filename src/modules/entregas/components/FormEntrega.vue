@@ -25,8 +25,11 @@ const formatoInput = ref<any>(null);
 const { data: documentos, isLoading: isLoadingDoc } = useObtenerDocumentos();
 
 /*************************** */
-const { data, isLoading } = useAutcompletarEstudiante('');
-const lista = ref(data.value);
+const { data: estudiantes, isLoading } = useAutcompletarEstudiante('');
+const lista = ref(estudiantes.value);
+if (!isLoading.value) {
+  console.log(estudiantes.value);
+}
 
 const loadingEst = ref(isLoading.value);
 const onFilterTest = async (val, update /* abort */) => {
@@ -39,12 +42,12 @@ const onFilterTest = async (val, update /* abort */) => {
   let list = response.data;
   if (val) {
     const needle = val.toLowerCase();
-    list = response.data.filter((x) =>
+    estudiantes.value = response.data.filter((x) =>
       x.nombre_completo.toLowerCase().includes(needle)
     );
   }
   update(() => {
-    lista.value = list;
+    estudiantes.value = list;
     loadingEst.value = false;
   });
 };
@@ -80,6 +83,7 @@ const errorMessages = computed(() => {
       <q-form @submit.prevent="guardar">
         <div class="row q-col-gutter-md">
           <div class="col-12">
+            {{ estudiantes }}
             <q-banner
               v-if="errorServer"
               inline-actions
@@ -101,7 +105,7 @@ const errorMessages = computed(() => {
               use-input
               hide-selected
               fill-input
-              :options="lista"
+              :options="estudiantes"
               option-value="estudiante_id"
               option-label="nombre_completo"
               input-debounce="0"
