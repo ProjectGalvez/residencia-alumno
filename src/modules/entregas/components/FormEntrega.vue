@@ -23,35 +23,8 @@ const errorServerValue = errorServer.value as ServerValidationError | null;
 const formatoInput = ref<any>(null);
 
 const { data: documentos, isLoading: isLoadingDoc } = useObtenerDocumentos();
-
-/*************************** */
-const { data: estudiantes, isLoading } = useAutcompletarEstudiante('');
-const lista = ref(estudiantes.value);
-if (!isLoading.value) {
-  console.log(estudiantes.value);
-}
-
-const loadingEst = ref(isLoading.value);
-const onFilterTest = async (val, update /* abort */) => {
-  const nombre = val === '' ? '' : val;
-  loadingEst.value = true;
-
-  const response = await documentosApi.get('/estudiante-autompletar', {
-    params: { busqueda: nombre },
-  });
-  let list = response.data;
-  if (val) {
-    const needle = val.toLowerCase();
-    estudiantes.value = response.data.filter((x) =>
-      x.nombre_completo.toLowerCase().includes(needle)
-    );
-  }
-  update(() => {
-    estudiantes.value = list;
-    loadingEst.value = false;
-  });
-};
-/***************************** */
+const { data: estudiantes, isLoading: isLoadingEst } =
+  useAutcompletarEstudiante('');
 
 const fecha = ref(date.formatDate(new Date(), 'YYYY/MM/DD'));
 const emit = defineEmits<{ (event: 'guardar', entrega: FormData): void }>();
@@ -59,10 +32,7 @@ const emit = defineEmits<{ (event: 'guardar', entrega: FormData): void }>();
 const guardar = () => {
   const saveEntrega = new FormData();
   saveEntrega.append('id', entrega.value.id);
-  saveEntrega.append(
-    'estudiante_id',
-    entrega.value.estudiante_id.estudiante_id + ''
-  );
+  saveEntrega.append('estudiante_id', entrega.value.estudiante_id + '');
   saveEntrega.append('documento_id', entrega.value.documento_id + '');
   saveEntrega.append('fecha_entrega', fecha.value + '');
   if (formatoInput.value) {
@@ -83,7 +53,6 @@ const errorMessages = computed(() => {
       <q-form @submit.prevent="guardar">
         <div class="row q-col-gutter-md">
           <div class="col-12">
-            {{ estudiantes }}
             <q-banner
               v-if="errorServer"
               inline-actions
@@ -100,28 +69,19 @@ const errorMessages = computed(() => {
 
           <div class="col-xs-12 col-sm-8">
             <q-select
-              clearable
               v-model="entrega.estudiante_id"
-              use-input
-              hide-selected
-              fill-input
               :options="estudiantes"
               option-value="estudiante_id"
               option-label="nombre_completo"
               input-debounce="0"
+              emit-value
+              map-options
+              :loading="isLoadingEst"
               label-slot
-              @filter="onFilterTest"
               :rules="[(val) => !!val || 'Selecciona un estudiante']"
             >
               <template v-slot:label>
                 Estudiante <span class="required-star">*</span>
-              </template>
-              <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">
-                    No hay resultados
-                  </q-item-section>
-                </q-item>
               </template>
             </q-select>
           </div>

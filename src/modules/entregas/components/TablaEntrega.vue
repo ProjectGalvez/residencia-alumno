@@ -2,21 +2,21 @@
 import { useRouter } from 'vue-router';
 import { ref, Ref } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
-import { Entrega } from 'src/modules/model/Model';
+import { EntregaPaginado } from 'src/modules/model/Model';
 import documentosApi from 'src/api/documentosApi';
 import DialogEliminar from '../../../shared/components/DialogEliminar.vue';
 import { columnasEntregas as columns } from '../composables/columnasEntregas';
 import useEliminarEntrega from '../composables/useEliminarEntrega';
 
-const fetcher = async (page: Ref<number>): Promise<Entrega[]> => {
-  const { data } = await documentosApi.get<Entrega[]>('/entregas', {
+const fetcher = async (page: Ref<number>): Promise<EntregaPaginado> => {
+  const { data } = await documentosApi.get<EntregaPaginado>('/entregas', {
     params: {
       page: page.value,
       perPage: 15,
       included: 'estudiante,documento',
     },
   });
-  return data.data;
+  return data;
 };
 const page = ref(1);
 
@@ -24,7 +24,7 @@ const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
 
-const { isLoading, data, isPreviousData } = useQuery({
+const { isLoading, data, isPreviousData, isFetching } = useQuery({
   queryKey: ['entregas', page],
   queryFn: () => fetcher(page),
   keepPreviousData: true,
@@ -63,7 +63,7 @@ const eliminar = (id: string) => {
       v-else-if="data"
       flat
       bordered
-      :rows="data"
+      :rows="data.data"
       :columns="columns"
       row-key="id"
       :loading="isLoading"
@@ -111,10 +111,19 @@ const eliminar = (id: string) => {
         </q-tr>
       </template>
     </q-table>
-    <div class="flex justify-end">
-      <p>Página: {{ page }} | Previous data: {{ isPreviousData }}</p>
-      <q-btn label="Anterior" @click="prevPage" />
-      <q-btn label="Siguiente" @click="nextPage" />
+    <div class="q-mt-md flex justify-end items-center">
+      <div class="q-mr-md">Página: {{ page }}</div>
+      <q-btn
+        :disable="isFetching || page === 1"
+        label="Anterior"
+        @click="prevPage"
+      />
+      <q-btn
+        v-if="data"
+        :disable="isFetching || page >= data?.meta.last_page"
+        label="Siguiente"
+        @click="nextPage"
+      />
     </div>
   </div>
 </template>
