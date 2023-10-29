@@ -4,7 +4,7 @@ const { data, isLoading } = useNumeroResidentes();
 </script>
 
 <template>
-  <div class="col-sm-12 col-md-3">
+  <div class="col-xs-12 col-sm-3">
     <q-card class="bg-primary text-white" flat bordered>
       <q-card-section>
         <div

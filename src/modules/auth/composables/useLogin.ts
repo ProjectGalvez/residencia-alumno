@@ -23,7 +23,6 @@ const useLogin = () => {
     } else if (roles.includes('estudiante')) {
       router.push({ name: 'dashboard-estudiante' });
     } else {
-      // Redirección predeterminada si el rol no coincide con los esperados
       router.push({ name: 'not-found' });
     }
   };

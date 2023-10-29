@@ -16,12 +16,26 @@ const routes: RouteRecordRaw[] = [
     path: '/dashboard',
     component: () => import('src/modules/layouts/DashboardLayout.vue'),
     name: 'dashboard',
+    meta: {
+      requiresAuth: true,
+      roles: ['admin', 'capturista'],
+    },
     children: [
       {
         path: '',
         component: () =>
           import('src/modules/dashboard/pages/DashboardPage.vue'),
         name: 'dashboard-home',
+      },
+      {
+        path: '/perfil',
+        component: () => import('src/modules/auth/pages/PerfilPage.vue'),
+        name: 'perfil-admin',
+      },
+      {
+        path: '/cambiar-password',
+        component: () => import('src/modules/auth/pages/CambiarPassword.vue'),
+        name: 'cambiar-password',
       },
       //Usuarios *************************
       {
@@ -229,6 +243,10 @@ const routes: RouteRecordRaw[] = [
     path: '/administracion',
     component: () => import('src/modules/layouts/EstudianteLayout.vue'),
     name: 'layout-estudiante',
+    meta: {
+      requiresAuth: true,
+      roles: ['admin', 'capturista', 'estudiante'],
+    },
     children: [
       {
         path: '',
@@ -237,6 +255,38 @@ const routes: RouteRecordRaw[] = [
             'src/modules/layouts/components/estudiante/DashboardEstudiante.vue'
           ),
         name: 'dashboard-estudiante',
+      },
+      {
+        path: '/perfil-estudiante',
+        component: () =>
+          import(
+            'src/modules/layouts/components/estudiante/PerfilEstudiante.vue'
+          ),
+        name: 'perfil-estudiante',
+      },
+      {
+        path: '/cambiar-password-estudiante',
+        component: () =>
+          import(
+            'src/modules/layouts/components/estudiante/CambiarPassword.vue'
+          ),
+        name: 'cambiar-password-estudiante',
+      },
+      {
+        path: '/estudiante-inicio',
+        component: () =>
+          import(
+            'src/modules/layouts/components/estudiante/DashboardEstudiante.vue'
+          ),
+        name: 'estudiante-inicio',
+      },
+      {
+        path: '/formatos',
+        component: () =>
+          import(
+            'src/modules/layouts/components/estudiante/FormatosDocumentos.vue'
+          ),
+        name: 'estudiante-formatos',
       },
     ],
   },

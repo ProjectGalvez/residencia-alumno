@@ -1,21 +1,35 @@
 <script setup lang="ts">
-import { useQuasar } from 'quasar';
+import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
+import usePerfil from 'src/modules/auth/composables/usePerfil';
 
-const $q = useQuasar();
-
-const usuarioString = $q.localStorage.getItem('user');
-const usuario = JSON.parse(usuarioString);
+const { user: usuario, isLoading } = usePerfil();
 </script>
 <template>
-  <q-img class="absolute-top" :src="usuario.url_portada" style="height: 150px">
+  <LoaderSpinner v-if="isLoading" />
+
+  <q-img
+    v-else-if="usuario"
+    class="absolute-top"
+    :src="usuario?.url_portada"
+    style="height: 150px"
+  >
     <div class="absolute-bottom bg-transparent">
       <q-avatar size="56px" class="q-mb-sm">
-        <img :src="usuario.url_foto" />
+        <img :src="usuario?.url_foto" />
       </q-avatar>
-      <div class="text-weight-bold">{{ usuario.name }}</div>
-      <div>{{ usuario.email }}</div>
+      <RouterLink :to="{ name: 'perfil-admin' }">
+        <div class="text-weight-bold shadow">{{ usuario.name }}</div>
+
+        <div class="shadow">{{ usuario.email }}</div>
+      </RouterLink>
     </div>
   </q-img>
 </template>
 
-<style scoped></style>
+<style scoped>
+.shadow {
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+</style>

@@ -8,7 +8,7 @@ const { data, isLoading } = useNumeroResidentesCarrera();
 
   <div
     v-else-if="data"
-    class="col-sm-6 col-md-3"
+    class="col-xs-12 col-sm-3"
     v-for="carrera in data"
     :key="carrera.carrera_id"
   >

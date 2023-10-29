@@ -11,7 +11,7 @@ const getCurrentUser = async (): Promise<AuthUser> => {
 
 const useCurrentUser = () => {
   const currentUser = ref<AuthUser>();
-  const { data } = useQuery(['currentUser'], getCurrentUser, {
+  const { data, isLoading } = useQuery(['current-user'], getCurrentUser, {
     staleTime: 1000 * 60 * 60,
   });
 
@@ -21,6 +21,7 @@ const useCurrentUser = () => {
 
   return {
     currentUser,
+    isLoading,
   };
 };
 

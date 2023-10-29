@@ -166,3 +166,33 @@ export interface Link {
   label: string;
   active: boolean;
 }
+
+export interface DocumentoEstudiante {
+  Id: string;
+  NombreDocumento: string;
+  FechaEntrega: Date;
+  FechaLimite: Date;
+  URLDocumento: null | string;
+  ExtensionDocumento: null | string;
+  Icono: string;
+}
+
+export interface DocumentoPendiente {
+  id: number;
+  nombre: string;
+}
+
+export interface Formato {
+  id: number;
+  nombre_documento: string;
+  fecha_limite: Date;
+  url_formato: null | string;
+  extencion_documento: null | string;
+  icono: Icono;
+}
+
+export enum Icono {
+  Clear = 'clear',
+  Description = 'description',
+  PDF = 'picture_as_pdf',
+}

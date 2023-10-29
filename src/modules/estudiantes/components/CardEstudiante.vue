@@ -2,6 +2,7 @@
 import { toRef, ref } from 'vue';
 import { Estudiante } from 'src/modules/model/Model';
 import FabEstudiante from './FabEstudiante.vue';
+import EntregasEstudiante from './EntregasEstudiante.vue';
 
 const props = defineProps<{ estudiante: Estudiante }>();
 const estudiante = toRef(props, 'estudiante');
@@ -245,6 +246,14 @@ const fabPos = ref([18, 18]);
                 <td>{{ periodo.fecha_termino }}</td>
               </tr>
             </table>
+          </q-card-section>
+        </q-card>
+      </div>
+
+      <div class="col-xs-12 col-md-6 q-pa-xs">
+        <q-card>
+          <q-card-section>
+            <EntregasEstudiante :id="estudiante.id" />
           </q-card-section>
         </q-card>
       </div>

@@ -13,9 +13,6 @@ const $q = useQuasar();
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
-
-const usuarioString = $q.localStorage.getItem('user');
-const usuario = JSON.parse(usuarioString);
 </script>
 
 <template>
@@ -67,7 +64,7 @@ const usuario = JSON.parse(usuarioString);
 
         <div class="q-gutter-sm row items-center no-wrap">
           <ToggleDark />
-          <AvatarUsuario :avatar="usuario.url_foto" />
+          <AvatarUsuario />
         </div>
       </q-toolbar>
     </q-header>

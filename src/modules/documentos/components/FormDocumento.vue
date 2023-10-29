@@ -24,7 +24,7 @@ const emitir = () => {
   const saveDocumento = new FormData();
   saveDocumento.append('id', documento.value.id + '');
   saveDocumento.append('nombre_documento', documento.value.nombre_documento);
-  saveDocumento.append('abrev_nombre', documento.value.abrev_nombre || '');
+  saveDocumento.append('abrev_nombre', documento.value.abrev_nombre + '');
   saveDocumento.append('fecha_limite', fecha.value);
   if (formatoInput.value) {
     saveDocumento.append('url_formato', formatoInput.value[0]);

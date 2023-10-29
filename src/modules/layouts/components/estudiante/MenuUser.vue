@@ -8,7 +8,7 @@ const router = useRouter();
 const { logout } = useLogout();
 
 const irPerfil = () => {
-  router.push({ name: 'perfil-admin' });
+  router.push({ name: 'perfil-estudiante' });
 };
 
 const { user: usuario, isLoading } = usePerfil();
@@ -19,7 +19,7 @@ const { user: usuario, isLoading } = usePerfil();
     <div v-else-if="usuario" class="row no-wrap q-pa-md">
       <div class="column">
         <div class="text-h6 q-mb-md">Configuración</div>
-        <div>
+        <div v-if="usuario.roles">
           Rol:
           <span class="text-subtitle1">{{ usuario.roles[0].name || '' }}</span>
         </div>

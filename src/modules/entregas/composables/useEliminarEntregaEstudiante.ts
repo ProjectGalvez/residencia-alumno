@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import { Loading, Notify } from 'quasar';
 import documentosApi from 'src/api/documentosApi';
 
-const useEliminarEntrega = (page: number) => {
+const useEliminarEntregaEstudiante = () => {
   const queryClient = useQueryClient();
 
   const eliminarRecursoFn = async (id: string | number | string[]) => {
@@ -28,9 +28,6 @@ const useEliminarEntrega = (page: number) => {
           color: 'positive',
           position: 'top-right',
           type: 'positive',
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['entregas', page],
         });
         queryClient.invalidateQueries({
           queryKey: ['entregas-trashed'],
@@ -59,4 +56,4 @@ const useEliminarEntrega = (page: number) => {
     isSuccess,
   };
 };
-export default useEliminarEntrega;
+export default useEliminarEntregaEstudiante;

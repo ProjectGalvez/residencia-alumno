@@ -5,7 +5,7 @@ import useVerEstudiante from '../composables/useVerEstudiante';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
-import useObtenerDocumentos from 'src/modules/documentos/composables/useObtenerDocumentos';
+import useObtenerPendientesEstudiante from 'src/modules/documentos/composables/useObtenerPendientesEstudiante';
 import { date } from 'quasar';
 import useCrearEntregaEst from '../composables/useCrearEntregaEst';
 import {
@@ -19,7 +19,8 @@ const { resource: estudiante, isLoading: isLoadingStudent } = useVerEstudiante(
   id + ''
 );
 
-const { data: documentos, isLoading: isLoadingDoc } = useObtenerDocumentos();
+const { data: documentos, isLoading: isLoadingDoc } =
+  useObtenerPendientesEstudiante(id + '');
 
 const entrega = ref({
   estudiante_id: estudiante.value?.id,
@@ -34,6 +35,9 @@ const fecha = ref(date.formatDate(new Date(), 'YYYY/MM/DD'));
 const { createEntrega, isLoadingCreate, errorServer } = useCrearEntregaEst(
   id + ''
 );
+
+const errorServerValue = errorServer.value as ServerValidationError | null;
+
 const guardar = () => {
   const saveEntrega = new FormData();
   saveEntrega.append('estudiante_id', id + '');
@@ -95,7 +99,7 @@ const links: Breadcrumb[] = [
                 v-model="entrega.documento_id"
                 :options="documentos"
                 option-value="id"
-                option-label="nombre_documento"
+                option-label="nombre"
                 emit-value
                 map-options
                 label-slot
