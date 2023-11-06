@@ -196,3 +196,110 @@ export enum Icono {
   Description = 'description',
   PDF = 'picture_as_pdf',
 }
+
+export interface EntregaEstudiante {
+  id: string;
+  nombre_documento: string;
+  fecha_entrega: Date;
+  fecha_limite: Date;
+  url_formato: null | string;
+  extencion_documento: null | string;
+  icono: string;
+}
+
+//Datos des residente que ve el estudiante
+export interface ResidenciaEstudiante {
+  estudiante_id: string;
+  periodo_id: number;
+  nombre_periodo: string;
+  empresa_id: string;
+  nombre_empresa: string;
+  rfc: string;
+  domicilio: string;
+  colonia: string;
+  cp: string;
+  ciudad: string;
+  telefono: string;
+  titular: string;
+  titular_puesto: string;
+  proyecto: string;
+}
+
+export interface EstudiantePaginado {
+  data: Estudiante[];
+  links: Links;
+  meta: Meta;
+}
+
+export interface ResultadoBusqueda {
+  url_foto: null | string;
+  nombre_completo_estudiante: string;
+  numero_control_estudiante: string;
+  nombre_carrera: string;
+  color_carrera: string;
+  id_estudiante: string;
+  id_carrera: number;
+  tiene_relacion_empresa: number;
+  nombre_empresa: null | string;
+  nombre_periodo: null | string;
+  id_empresa: null | string;
+  iniciales_nombre_apellido: string;
+  id_periodo: number | null;
+  perido_activo: number | null;
+}
+
+//Residente en el admin
+export interface Residente {
+  estudiante_id: string;
+  nombre_completo: string;
+  url_foto: null | string;
+  iniciales_nombre_apellido: string;
+  nombre_carrera: string;
+  color_carrera: string;
+  nombre_empresa: string;
+  telefono_estudiante: string;
+  numero_control_estudiante: string;
+  proyecto: string;
+}
+
+export interface VerResidente {
+  id: string;
+  user_id: string;
+  carrera_id: number;
+  nombre: string;
+  apellidos: string;
+  numero_control: string;
+  domicilio: string;
+  email: string;
+  seguridad_social: string;
+  no_seguridad_social: string;
+  ciudad: string;
+  telefono: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: null;
+  nombre_estudiante: string;
+  telefono_estudiante: string;
+  domicilio_estudiante: string;
+  ciudad_estudiante: null;
+  id_estudiante: string;
+  nombre_carrera: string;
+  color_carrera: string;
+  escudo_carrera: string;
+  nombre_periodo: string;
+  id_periodo: number;
+  url_foto: string;
+  giro: string;
+  rfc: string;
+  colonia: string;
+  cp: string;
+  mision: string;
+  titular: string;
+  titular_puesto: string;
+  asesor_externo: string;
+  asesor_externo_puesto: string;
+  nombre_firmara: string;
+  nombre_firmara_puesto: string;
+  id_empresa: string;
+  proyecto: string;
+}

@@ -64,7 +64,12 @@ const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
             <q-item-section> Inicio </q-item-section>
           </q-item>
 
-          <q-item active clickable v-ripple>
+          <q-item
+            active
+            clickable
+            v-ripple
+            :to="{ name: 'documentos-entregados' }"
+          >
             <q-item-section avatar>
               <q-icon name="star" />
             </q-item-section>

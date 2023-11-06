@@ -37,6 +37,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/modules/auth/pages/CambiarPassword.vue'),
         name: 'cambiar-password',
       },
+      {
+        path: '/buscar',
+        component: () =>
+          import('src/modules/dashboard/pages/ResultadosBusqueda.vue'),
+        name: 'buscar',
+      },
       //Usuarios *************************
       {
         path: '/usuarios',
@@ -58,6 +64,31 @@ const routes: RouteRecordRaw[] = [
         component: () =>
           import('src/modules/estudiantes/pages/EditarUsuario.vue'),
         name: 'editar-usuario',
+      },
+      //Residentes
+      {
+        path: '/residentes/crear',
+        component: () =>
+          import('src/modules/residentes/pages/CrearResidente.vue'),
+        name: 'crear-residente',
+      },
+      {
+        path: '/residentes',
+        component: () =>
+          import('src/modules/residentes/pages/ListarResidente.vue'),
+        name: 'listar-residente',
+      },
+      {
+        path: '/residentes/:id',
+        component: () =>
+          import('src/modules/residentes/pages/VerResidente.vue'),
+        name: 'ver-residente',
+      },
+      {
+        path: '/residentes/:id/editar',
+        component: () =>
+          import('src/modules/residentes/pages/EditarResidente.vue'),
+        name: 'editar-residente',
       },
 
       //Estudiantes
@@ -287,6 +318,14 @@ const routes: RouteRecordRaw[] = [
             'src/modules/layouts/components/estudiante/FormatosDocumentos.vue'
           ),
         name: 'estudiante-formatos',
+      },
+      {
+        path: '/documentos-entregados',
+        component: () =>
+          import(
+            'src/modules/layouts/components/estudiante/DocumentosEntregados.vue'
+          ),
+        name: 'documentos-entregados',
       },
     ],
   },

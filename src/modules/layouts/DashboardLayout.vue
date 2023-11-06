@@ -5,6 +5,7 @@ import { useQuasar } from 'quasar';
 import ToggleDark from '../../shared/components/ToggleDark.vue';
 import DrawerDashboard from './components/dashboard/DrawerDashboard.vue';
 import AvatarUsuario from './components/dashboard/AvatarUsuario.vue';
+import { useRouter } from 'vue-router';
 
 const leftDrawerOpen = ref(false);
 const search = ref('');
@@ -13,6 +14,11 @@ const $q = useQuasar();
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const router = useRouter();
+const buscar = () => {
+  router.push({ name: 'buscar', query: { q: search.value } });
+};
 </script>
 
 <template>
@@ -41,13 +47,14 @@ function toggleLeftDrawer() {
         <q-space />
 
         <q-input
-          class="GNL__toolbar-input"
+          class="GNL__toolbar-input color-input"
           outlined
           dense
           v-model="search"
-          color="bg-grey-1 shadow-1"
-          bg-color="white"
           placeholder="Buscar estudiante"
+          @keydown.enter="buscar"
+          color="white"
+          label-color="white"
         >
           <template v-slot:prepend>
             <q-icon v-if="search === ''" name="search" />
@@ -128,4 +135,8 @@ function toggleLeftDrawer() {
 
 .route-leave-active
   transition: all 0.3s ease-in
+
+.body--light .color-input
+  color: white
+  background-color: white
 </style>

@@ -13,6 +13,7 @@ const usePerfil = () => {
   const { isLoading, isError, data } = useQuery({
     queryKey: ['current-user'],
     queryFn: getUser,
+    staleTime: 1000 * 60 * 60,
   });
   watch(
     data,

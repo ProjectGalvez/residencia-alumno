@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/vue-query';
 import { EntregaPaginado } from 'src/modules/model/Model';
 import documentosApi from 'src/api/documentosApi';
 import DialogEliminar from '../../../shared/components/DialogEliminar.vue';
-import { columnasEntregas as columns } from '../composables/columnasEntregas';
+import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import useEliminarEntrega from '../composables/useEliminarEntrega';
 
 const fetcher = async (page: Ref<number>): Promise<EntregaPaginado> => {
@@ -24,21 +24,12 @@ const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
 
-const { isLoading, data, isPreviousData, isFetching } = useQuery({
+const { isLoading, data } = useQuery({
   queryKey: ['entregas', page],
   queryFn: () => fetcher(page),
   keepPreviousData: true,
 });
 const { eliminarRecurso: eliminarEntrega } = useEliminarEntrega(page.value);
-
-const prevPage = () => {
-  page.value = Math.max(page.value - 1, 1);
-};
-const nextPage = () => {
-  if (!isPreviousData.value) {
-    page.value = page.value + 1;
-  }
-};
 
 const verEntrega = (id: string) => {
   router.push({ name: 'ver-entrega', params: { id } });
@@ -58,29 +49,26 @@ const eliminar = (id: string) => {
       :recurso-id="recursoId"
       @eliminar="eliminarEntrega"
     />
-    <div v-if="isLoading">Cargando</div>
-    <q-table
-      v-else-if="data"
-      flat
-      bordered
-      :rows="data.data"
-      :columns="columns"
-      row-key="id"
-      :loading="isLoading"
-      hide-bottom
-    >
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="estudiante" :props="props">{{
-            props.row.estudiante.nombre + ' ' + props.row.estudiante.apellidos
-          }}</q-td>
-          <q-td key="fecha_entrega" :props="props">{{
-            props.row.fecha_entrega
-          }}</q-td>
-          <q-td key="documento" :props="props">{{
-            props.row.documento.nombre_documento
-          }}</q-td>
-          <q-td key="accion" :props="props">
+    <LoaderSpinner v-if="isLoading" />
+    <q-markup-table v-else-if="data">
+      <thead>
+        <tr>
+          <th>Residente</th>
+          <th>Fecha entrega</th>
+          <th>Documento</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="entrega in data?.data" :key="entrega.id">
+          <td>
+            {{ entrega.estudiante?.nombre }} {{ entrega.estudiante?.apellidos }}
+          </td>
+          <td>
+            {{ entrega.fecha_entrega }}
+          </td>
+          <td>{{ entrega.documento?.nombre_documento }}</td>
+          <td>
             <q-btn-group push>
               <q-btn
                 size="sm"
@@ -88,7 +76,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="visibility"
-                @click="verEntrega(props.row.id)"
+                @click="verEntrega(entrega.id)"
               />
               <q-btn
                 size="sm"
@@ -96,7 +84,7 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="edit"
-                @click="editarEntrega(props.row.id)"
+                @click="editarEntrega(entrega.id)"
               />
               <q-btn
                 size="sm"
@@ -104,25 +92,23 @@ const eliminar = (id: string) => {
                 push
                 glossy
                 icon="delete"
-                @click="eliminar(props.row.id)"
+                @click="eliminar(entrega.id)"
               />
             </q-btn-group>
-          </q-td>
-        </q-tr>
-      </template>
-    </q-table>
+          </td>
+        </tr>
+      </tbody>
+    </q-markup-table>
+
     <div class="q-mt-md flex justify-end items-center">
       <div class="q-mr-md">Página: {{ page }}</div>
-      <q-btn
-        :disable="isFetching || page === 1"
-        label="Anterior"
-        @click="prevPage"
-      />
-      <q-btn
-        v-if="data"
-        :disable="isFetching || page >= data?.meta.last_page"
-        label="Siguiente"
-        @click="nextPage"
+      <q-pagination
+        v-model="page"
+        :max="data?.meta.last_page || 1"
+        direction-links
+        flat
+        color="grey"
+        active-color="primary"
       />
     </div>
   </div>

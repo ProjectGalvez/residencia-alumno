@@ -6,6 +6,7 @@ const links1 = [
   { icon: 'analytics', text: 'Dashboard', to: 'dashboard-home' },
   { icon: 'assignment_turned_in', text: 'Entregas', to: 'listar-entrega' },
   { icon: 'people', text: 'Usuarios', to: 'listar-usuario' },
+  { icon: 'history_edu', text: 'Residentes', to: 'listar-residente' },
   { icon: 'school', text: 'Estudiantes', to: 'listar-estudiante' },
 ];
 

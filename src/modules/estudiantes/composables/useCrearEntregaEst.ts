@@ -33,6 +33,11 @@ const useCrearEntregaEst = (idEstudiante: string) => {
           queryKey: ['entregas'],
           exact: false,
         });
+
+        queryClient.invalidateQueries({
+          queryKey: ['entrega-por-residente', idEstudiante],
+          exact: false,
+        });
         //queryClient.setQueryData([resourceName], resource);
         router.push({ name: 'ver-estudiante', params: { id: idEstudiante } });
       },

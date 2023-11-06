@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import TablaEstudianteEliminado from '../components/TablaEstudianteEliminado.vue';
+import TablaEstudiantePaginado from '../components/TablaEstudiantePaginado.vue';
 import { useRouter } from 'vue-router';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import { getRol } from 'src/shared/helpers/getUser';
-import TablaEstudiante from '../components/TablaEstudiante.vue';
 
 const router = useRouter();
 const crearEstudiante = () => {
@@ -31,7 +32,13 @@ const links: Breadcrumb[] = [{ label: 'Estudiantes', icon: 'school' }];
         </div>
       </q-card-section>
       <q-card-section>
-        <TablaEstudiante />
+        <TablaEstudiantePaginado />
+      </q-card-section>
+    </q-card>
+    <q-card class="q-mt-md">
+      <q-card-section> Estudiantes eliminados </q-card-section>
+      <q-card-section>
+        <TablaEstudianteEliminado />
       </q-card-section>
     </q-card>
   </q-page>

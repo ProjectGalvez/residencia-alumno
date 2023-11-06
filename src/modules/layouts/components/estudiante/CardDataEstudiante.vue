@@ -9,15 +9,17 @@ const { isLoading, data: estudiante } = useEstudiante();
   <LoaderSpinner v-if="isLoading" />
   <q-card v-else-if="estudiante?.nombre">
     <q-card-section>
-      <div class="fontsize-14 text-center text-weight-light flex items-center">
+      <div class="fontsize-18 text-center text-weight-light flex items-center">
         <q-icon name="school" class="q-mr-xs" />
         Bienvenido(a) {{ estudiante.nombre }} {{ estudiante.apellidos }}
       </div>
     </q-card-section>
     <q-card-section>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi, ea
-      laudantium possimus itaque dolor sapiente quos ipsam maxime enim porro
-      alias hic esse modi accusamus, explicabo assumenda fugit aperiam animi.
+      ¡Bienvenido a la Plataforma de Residencias Profesionales del Instituto
+      Tecnológico de Tecomatlán! Aquí, podrás gestionar tus documentos,
+      descargar formatos y acceder a recursos útiles para aprovechar al máximo
+      tu experiencia de Residencia Profesional. ¡Te deseamos mucho éxito en tu
+      viaje educativo y profesional!
     </q-card-section>
     <q-card-section>
       <div class="row">

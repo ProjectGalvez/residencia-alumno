@@ -41,7 +41,9 @@ const eliminar = (id: string) => {
     </div>
     <LoaderSpinner v-if="isLoading" />
     <q-timeline v-else-if="data" color="secondary">
+      <div v-if="data.length === 0">No hay documentos agregados aún</div>
       <q-timeline-entry
+        v-else
         v-for="entrega in data"
         :key="entrega.Id"
         :title="entrega.NombreDocumento"
@@ -84,6 +86,7 @@ const eliminar = (id: string) => {
         </div>
       </q-timeline-entry>
     </q-timeline>
+    <div v-else>No hay documentos entregados</div>
   </div>
 </template>
 

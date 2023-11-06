@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, toRef } from 'vue';
+import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 </script>
 
 <template>

@@ -29,7 +29,7 @@ const { data: formatos, isLoading, error } = useObtenerFormatos();
               <div class="col">
                 <div v-if="formato.url_formato">
                   <q-icon :name="formato.icono" />
-                  <a :href="formato.url_formato" target="_blank"> Descargar </a>
+                  <a :href="formato.url_formato" download> Descargar </a>
                 </div>
               </div>
             </div>
