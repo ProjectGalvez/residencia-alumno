@@ -10,6 +10,9 @@ const routes: RouteRecordRaw[] = [
     path: '/login',
     component: () => import('src/modules/auth/pages/LoginPage.vue'),
     name: 'login',
+    meta: {
+      requiresAuth: false,
+    },
   },
 
   {
@@ -326,6 +329,12 @@ const routes: RouteRecordRaw[] = [
             'src/modules/layouts/components/estudiante/DocumentosEntregados.vue'
           ),
         name: 'documentos-entregados',
+      },
+      {
+        path: '/acerca-de',
+        component: () =>
+          import('src/modules/layouts/components/estudiante/AcercaDe.vue'),
+        name: 'acerca-de',
       },
     ],
   },

@@ -19,20 +19,27 @@ const { data: formatos, isLoading, error } = useObtenerFormatos();
             </div>
           </q-card-section>
           <q-card-section>
-            <div v-for="formato in formatos" :key="formato.id" class="row">
-              <div class="col">
-                {{ formato.nombre_documento }}
-              </div>
-              <div class="col">
-                {{ formato.fecha_limite }}
-              </div>
-              <div class="col">
-                <div v-if="formato.url_formato">
-                  <q-icon :name="formato.icono" />
-                  <a :href="formato.url_formato" download> Descargar </a>
-                </div>
-              </div>
-            </div>
+            <q-markup-table>
+              <thead>
+                <tr>
+                  <td>Formato</td>
+                  <td>Fecha límite de entrega</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="formato in formatos" :key="formato.id">
+                  <td>{{ formato.nombre_documento }}</td>
+                  <td>{{ formato.fecha_limite }}</td>
+                  <td>
+                    <div v-if="formato.url_formato">
+                      <q-icon :name="formato.icono" />
+                      <a :href="formato.url_formato" download> Descargar </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </q-markup-table>
           </q-card-section>
         </q-card>
       </div>

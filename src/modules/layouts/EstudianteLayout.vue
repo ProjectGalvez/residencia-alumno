@@ -58,20 +58,15 @@ const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
         <q-list padding>
           <q-item clickable v-ripple :to="{ name: 'estudiante-inicio' }">
             <q-item-section avatar>
-              <q-icon name="inbox" />
+              <q-icon name="home" />
             </q-item-section>
 
             <q-item-section> Inicio </q-item-section>
           </q-item>
 
-          <q-item
-            active
-            clickable
-            v-ripple
-            :to="{ name: 'documentos-entregados' }"
-          >
+          <q-item clickable v-ripple :to="{ name: 'documentos-entregados' }">
             <q-item-section avatar>
-              <q-icon name="star" />
+              <q-icon name="fact_check" />
             </q-item-section>
 
             <q-item-section> Documentos entregados </q-item-section>
@@ -79,15 +74,15 @@ const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
 
           <q-item clickable v-ripple :to="{ name: 'estudiante-formatos' }">
             <q-item-section avatar>
-              <q-icon name="send" />
+              <q-icon name="description" />
             </q-item-section>
 
             <q-item-section> Formatos </q-item-section>
           </q-item>
 
-          <q-item clickable v-ripple>
+          <q-item clickable v-ripple :to="{ name: 'acerca-de' }">
             <q-item-section avatar>
-              <q-icon name="drafts" />
+              <q-icon name="info" />
             </q-item-section>
 
             <q-item-section> Acerca de </q-item-section>

@@ -52,6 +52,21 @@ export default route(function (/* { store, ssrContext } */) {
       } else {
         next('/403');
       }
+    } else if (to.path === '/login') {
+      if (userData) {
+        // Si el usuario ya está logeado, redirige según su rol
+        if (userData.role.includes('admin')) {
+          next('/dashboard');
+        } else if (userData.role.includes('capturista')) {
+          next('/dashboard');
+        } else if (userData.role.includes('estudiante')) {
+          next('/administracion');
+        } else {
+          next('/not-found');
+        }
+      } else {
+        next();
+      }
     } else {
       next();
     }

@@ -76,6 +76,7 @@ const irAdministracion = () => {
             </div>
           </div>
         </div>
+
         <SliderImagenes />
       </q-page>
     </q-page-container>

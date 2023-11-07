@@ -42,6 +42,10 @@ const verResidente = (id: string) => {
 const editarResidente = (id: string) => {
   router.push({ name: 'editar-residente', params: { id } });
 };
+
+const pdf = async () => {
+  await documentosApi.get('/residentes-export-pdf');
+};
 </script>
 
 <template>
@@ -54,6 +58,18 @@ const editarResidente = (id: string) => {
         @eliminar="cancelarResidencia"
         mensaje="¿Estas seguro de cancelar la residencia?"
       />
+      //TODO: reducir tamaño de imagrn
+
+      <div class="flex justify-end">
+        <q-btn
+          round
+          icon="picture_as_pdf"
+          color="negative"
+          size="sm"
+          @click="pdf"
+        />
+      </div>
+
       <q-markup-table>
         <thead>
           <tr>

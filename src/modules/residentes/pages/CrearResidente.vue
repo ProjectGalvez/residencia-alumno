@@ -5,6 +5,7 @@ import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import useObtenerPeriodos from 'src/modules/periodos/composables/useObtenerPeriodos';
 import useObtenerEmpresas from 'src/modules/empresas/composables/useObtenerEmpresas';
 import useEstudiantesSinResidencia from '../composables/useEstudiantesSinResidencia';
+import useAsignarResidencia from '../composables/useAsignarResidencia';
 
 const residente = ref({
   estudiante_id: '',
@@ -16,9 +17,12 @@ const { data: periodos, isLoading: isLoadingPeriodos } = useObtenerPeriodos();
 const { data: empresas, isLoading: isLoadingEmpresas } = useObtenerEmpresas();
 const { data: estudiantes, isLoading: isLoadingEstudiantes } =
   useEstudiantesSinResidencia();
+const { mutate, isLoading: isLoadingAsignar } = useAsignarResidencia(
+  residente.value.estudiante_id
+);
 
 const guardar = () => {
-  console.log('Guardar');
+  mutate(residente.value);
 };
 const links: Breadcrumb[] = [
   { label: 'Residentes', icon: 'history_edu', to: 'listar-residente' },
@@ -99,7 +103,7 @@ const links: Breadcrumb[] = [
 
                     <div class="col-xs-12 col-sm-10">
                       <q-select
-                        v-model="residente.proyecto"
+                        v-model="residente.empresa_id"
                         :options="empresas"
                         label-slot
                         option-value="id"
@@ -121,7 +125,7 @@ const links: Breadcrumb[] = [
                         label="Asignar residencia"
                         color="primary"
                         type="submit"
-                        :loading="isLoadingEmpresas"
+                        :loading="isLoadingAsignar"
                       />
                     </div>
                   </div>
