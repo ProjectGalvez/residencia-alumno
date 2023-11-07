@@ -58,7 +58,6 @@ const pdf = async () => {
         @eliminar="cancelarResidencia"
         mensaje="¿Estas seguro de cancelar la residencia?"
       />
-      //TODO: reducir tamaño de imagrn
 
       <div class="flex justify-end">
         <q-btn
@@ -101,7 +100,7 @@ const pdf = async () => {
                     >
                       {{ residente.nombre_carrera }}
                     </q-chip>
-                    <q-chip dense text-color="white" icon="call">
+                    <q-chip dense color="teal" text-color="white" icon="call">
                       {{ residente.telefono_estudiante }}
                     </q-chip>
                   </div>

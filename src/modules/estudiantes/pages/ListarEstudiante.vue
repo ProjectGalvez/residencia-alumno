@@ -4,14 +4,16 @@ import TablaEstudiantePaginado from '../components/TablaEstudiantePaginado.vue';
 import { useRouter } from 'vue-router';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
-import { getRol } from 'src/shared/helpers/getUser';
+import usePerfil from 'src/modules/auth/composables/usePerfil';
+import { ref } from 'vue';
 
 const router = useRouter();
 const crearEstudiante = () => {
   router.push({ name: 'crear-estudiante' });
 };
 
-const rol: string = getRol();
+const { user, isLoading } = usePerfil();
+
 const links: Breadcrumb[] = [{ label: 'Estudiantes', icon: 'school' }];
 </script>
 <template>
@@ -35,7 +37,8 @@ const links: Breadcrumb[] = [{ label: 'Estudiantes', icon: 'school' }];
         <TablaEstudiantePaginado />
       </q-card-section>
     </q-card>
-    <q-card class="q-mt-md">
+    <div v-if="isLoading">Cargando ---</div>
+    <q-card v-else-if="user.roles[0].name === 'admin'" class="q-mt-md">
       <q-card-section> Estudiantes eliminados </q-card-section>
       <q-card-section>
         <TablaEstudianteEliminado />

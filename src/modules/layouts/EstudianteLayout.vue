@@ -5,15 +5,21 @@ import ToggleDark from '../../shared/components/ToggleDark.vue';
 import AvatarUsuario from './components/estudiante/AvatarUsuario.vue';
 import useCarreraEstudiante from './components/estudiante/composables/useCarreraEstudiante';
 import usePerfil from 'src/modules/auth/composables/usePerfil';
+import { useRouter } from 'vue-router';
 
 const $q = useQuasar();
 const leftDrawerOpen = ref(false);
+const router = useRouter();
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
 const { data, isLoading } = useCarreraEstudiante();
 const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
+
+const inicio = () => {
+  router.push('/');
+};
 </script>
 
 <template>
@@ -27,7 +33,7 @@ const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
+        <q-toolbar-title @click="inicio" class="inicio">
           <q-avatar>
             <img src="/src/assets/logo-180x180.png" width="45" />
           </q-avatar>
@@ -115,4 +121,8 @@ const { user: usuario, isLoading: isLoadingPerfil } = usePerfil();
   </q-layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.inicio {
+  cursor: pointer;
+}
+</style>

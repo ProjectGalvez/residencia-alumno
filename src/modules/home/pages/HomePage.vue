@@ -60,7 +60,7 @@ const irAdministracion = () => {
                 >
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+                Enfocados en brindar las herramientas y apoyo necesarios para que alcances el éxito en tus residencias profesionales.
               </p>
             </div>
             <div class="col-xs-12 col-sm-6 items-center">

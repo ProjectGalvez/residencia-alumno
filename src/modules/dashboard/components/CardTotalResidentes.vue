@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import useNumeroResidentes from '../composables/useNumeroResidentes';
 const { data, isLoading } = useNumeroResidentes();
+const router = useRouter();
+const residentesIr = () => {
+  router.push({ name: 'listar-residente' });
+};
 </script>
 
 <template>
   <div class="col-xs-12 col-sm-3">
-    <q-card class="bg-primary text-white" flat bordered>
+    <q-card
+      class="bg-primary text-white clickable"
+      flat
+      bordered
+      @click="residentesIr"
+    >
       <q-card-section>
         <div
           class="fontsize-11 text-center text-weight-light flex items-center"
@@ -30,4 +40,8 @@ const { data, isLoading } = useNumeroResidentes();
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.clickable {
+  cursor: pointer;
+}
+</style>

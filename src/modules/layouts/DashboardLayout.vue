@@ -19,6 +19,9 @@ const router = useRouter();
 const buscar = () => {
   router.push({ name: 'buscar', query: { q: search.value } });
 };
+const inicio = () => {
+  router.push('/');
+};
 </script>
 
 <template>
@@ -38,7 +41,8 @@ const buscar = () => {
         <q-toolbar-title
           v-if="$q.screen.gt.xs"
           shrink
-          class="row items-center no-wrap"
+          class="row items-center no-wrap inicio"
+          @click="inicio"
         >
           <img src="/src/assets/logo-180x180.png" width="45" />
           <span class="q-ml-sm">DDEP</span>
@@ -139,4 +143,6 @@ const buscar = () => {
 .body--light .color-input
   color: white
   background-color: white
+.inicio
+  cursor: pointer
 </style>
