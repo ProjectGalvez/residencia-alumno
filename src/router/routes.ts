@@ -64,8 +64,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: '/usuarios/:id/editar',
-        component: () =>
-          import('src/modules/estudiantes/pages/EditarUsuario.vue'),
+        component: () => import('src/modules/user/pages/EditarUsuario.vue'),
         name: 'editar-usuario',
       },
       //Residentes
