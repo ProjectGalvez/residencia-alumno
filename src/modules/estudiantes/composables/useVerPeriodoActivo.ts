@@ -10,8 +10,12 @@ const getResource = async <Periodo>(): Promise<Periodo> => {
 
 const useVerPeriodo = () => {
   const resource = ref<Periodo>();
-  const { data, isLoading, error } = useQuery(['periodo-activo'], () =>
-    getResource<Periodo>()
+  const { data, isLoading, error } = useQuery(
+    ['periodo-activo'],
+    () => getResource<Periodo>(),
+    {
+      staleTime: 1000 * 60 * 60,
+    }
   );
   watch(
     data,

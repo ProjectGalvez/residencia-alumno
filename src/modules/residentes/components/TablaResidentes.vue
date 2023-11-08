@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { ref, Ref } from 'vue';
+import { ref } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import documentosApi from 'src/api/documentosApi';
 import { Residente } from 'src/modules/model/Model';
@@ -8,23 +8,18 @@ import DialogEliminar from '../../../shared/components/DialogEliminar.vue';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import useCancelarResidencia from '../composables/useCancelarResidencia';
 
-const getResidentes = async (page: Ref<number>): Promise<Residente[]> => {
-  const { data } = await documentosApi.get<Residente[]>('/residentes', {
-    params: {
-      page: page.value,
-    },
-  });
+const getResidentes = async (): Promise<Residente[]> => {
+  const { data } = await documentosApi.get<Residente[]>('/residentes');
   return data;
 };
 
-const page = ref(1);
 const router = useRouter();
 const confirm = ref(false);
 const recursoId = ref('');
 
 const { isLoading, data: residentes } = useQuery({
-  queryKey: ['residentes', page],
-  queryFn: () => getResidentes(page),
+  queryKey: ['residentes'],
+  queryFn: () => getResidentes(),
   keepPreviousData: true,
   staleTime: 1000 * 60 * 60,
 });
@@ -42,9 +37,10 @@ const verResidente = (id: string) => {
 const editarResidente = (id: string) => {
   router.push({ name: 'editar-residente', params: { id } });
 };
-
+const URL = `${process.env.SERVER_URL}`;
 const pdf = async () => {
-  await documentosApi.get('/residentes-export-pdf');
+  const exportURL = URL + '/residentes-export-pdf';
+  window.open(exportURL, '_blank');
 };
 </script>
 
@@ -60,13 +56,15 @@ const pdf = async () => {
       />
 
       <div class="flex justify-end">
-        <q-btn
-          round
-          icon="picture_as_pdf"
-          color="negative"
-          size="sm"
-          @click="pdf"
-        />
+        <div>
+          <q-btn
+            round
+            icon="picture_as_pdf"
+            color="negative"
+            size="sm"
+            @click="pdf"
+          />
+        </div>
       </div>
 
       <q-markup-table>

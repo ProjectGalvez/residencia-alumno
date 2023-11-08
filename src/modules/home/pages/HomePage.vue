@@ -45,7 +45,9 @@ const irAdministracion = () => {
                     >Inicio de Sesión</router-link
                   >
                 </li>
-                <li><a>Acerca de</a></li>
+                <li>
+                  <router-link :to="{ name: 'about' }">Acerca de</router-link>
+                </li>
                 <!-- Agrega más elementos de menú según sea necesario -->
               </ul>
             </div>
@@ -60,7 +62,8 @@ const irAdministracion = () => {
                 >
               </div>
               <p>
-                Enfocados en brindar las herramientas y apoyo necesarios para que alcances el éxito en tus residencias profesionales.
+                Enfocados en brindar las herramientas y apoyo necesarios para
+                que alcances el éxito en tus residencias profesionales.
               </p>
             </div>
             <div class="col-xs-12 col-sm-6 items-center">

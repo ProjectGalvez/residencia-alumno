@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ResidentesCarrera from './ResidentesCarrera.vue';
 import { toRef } from 'vue';
 import { date } from 'quasar';
 import { Carrera } from 'src/modules/model/Model';
@@ -76,6 +77,12 @@ const carrera = toRef(props, 'carrera');
       </div>
     </div>
   </q-card>
+
+  <div class="row q-mt-md">
+    <div class="col-12">
+      <ResidentesCarrera :id="carrera.id" />
+    </div>
+  </div>
 </template>
 
 <style scoped>

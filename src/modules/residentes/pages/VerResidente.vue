@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import FabResidente from '../components/FabResidente.vue';
 import EntregasEstudiante from '../../estudiantes/components/EntregasEstudiante.vue';
 import DatosResidencia from '../components/DatosResidencia.vue';
 import { useRoute } from 'vue-router';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
+import { ref } from 'vue';
 
 const route = useRoute();
 const { id = '' } = route.params;
@@ -12,6 +14,7 @@ const links: Breadcrumb[] = [
   { label: 'Residentes', icon: 'history_edu', to: 'listar-residente' },
   { label: 'Ver residente', icon: 'visibility' },
 ];
+const fabPos = ref([18, 18]);
 </script>
 <template>
   <q-page padding>
@@ -30,6 +33,9 @@ const links: Breadcrumb[] = [
         </q-card>
       </div>
     </div>
+    <q-page-sticky position="bottom-right" :offset="fabPos">
+      <FabResidente :id="id" />
+    </q-page-sticky>
   </q-page>
 </template>
 

@@ -70,6 +70,12 @@ const routes: RouteRecordRaw[] = [
       },
       //Residentes
       {
+        path: '/asignardocumento-residente/:id',
+        component: () =>
+          import('src/modules/residentes/pages/AgregarDocumentoResidente.vue'),
+        name: 'asignar-documento-residente',
+      },
+      {
         path: '/residentes/crear',
         component: () =>
           import('src/modules/residentes/pages/CrearResidente.vue'),
@@ -337,6 +343,12 @@ const routes: RouteRecordRaw[] = [
         name: 'acerca-de',
       },
     ],
+  },
+
+  {
+    path: '/about',
+    component: () => import('src/modules/home/pages/AcercaDe.vue'),
+    name: 'about',
   },
 
   // Always leave this as last one,
