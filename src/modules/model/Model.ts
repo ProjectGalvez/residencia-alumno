@@ -303,3 +303,15 @@ export interface VerResidente {
   id_empresa: string;
   proyecto: string;
 }
+
+export interface DocumentoPendienteRes {
+  documento_id: number;
+  nombre_documento: string;
+  abrev_nombre: null | string;
+  fecha_limite: Date;
+  url_formato: null | string;
+  created_at: Date;
+  entrega_id: null | string;
+  documento_entregado: null | string;
+  fecha_limite_vencida: number;
+}

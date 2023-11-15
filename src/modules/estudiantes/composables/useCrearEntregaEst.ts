@@ -38,6 +38,11 @@ const useCrearEntregaEst = (idEstudiante: string) => {
           queryKey: ['entrega-por-residente', idEstudiante],
           exact: false,
         });
+
+        queryClient.invalidateQueries({
+          queryKey: ['documentos-pendientes'],
+          exact: false,
+        });
         //queryClient.setQueryData([resourceName], resource);
         router.push({ name: 'ver-estudiante', params: { id: idEstudiante } });
       },

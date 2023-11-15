@@ -96,6 +96,14 @@ watch(q, (newQ, oldQ) => {
                       label="Agregar documentos"
                     />
                   </RouterLink>
+                  <RouterLink
+                    :to="{
+                      name: 'ver-residente',
+                      params: { id: estudiante.id_estudiante },
+                    }"
+                  >
+                    <q-btn size="sm" color="info" label="Ver residente" />
+                  </RouterLink>
                 </div>
               </div>
               <div v-else-if="estudiante.perido_activo === 0">
@@ -116,6 +124,14 @@ watch(q, (newQ, oldQ) => {
                   }"
                 >
                   {{ estudiante.nombre_periodo }}
+                </RouterLink>
+                <RouterLink
+                  :to="{
+                    name: 'ver-residente',
+                    params: { id: estudiante.id_estudiante },
+                  }"
+                >
+                  <q-btn size="sm" color="info" label="Ver residente" />
                 </RouterLink>
               </div>
               <div v-else-if="estudiante.perido_activo === null">

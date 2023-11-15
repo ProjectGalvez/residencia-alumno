@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import DocumentosPendientes from '../components/DocumentosPendientes.vue';
 import FabResidente from '../components/FabResidente.vue';
 import EntregasEstudiante from '../../estudiantes/components/EntregasEstudiante.vue';
 import DatosResidencia from '../components/DatosResidencia.vue';
@@ -25,16 +26,24 @@ const fabPos = ref([18, 18]);
       </div>
     </div>
     <div class="row q-pt-md">
-      <div class="col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-6 q-pr-xs">
         <q-card>
           <q-card-section>
             <EntregasEstudiante :id="id + ''" />
           </q-card-section>
         </q-card>
       </div>
+
+      <div class="col-xs-12 col-md-6 q-pl-xs">
+        <q-card>
+          <q-card-section>
+            <DocumentosPendientes :id="id + ''" />
+          </q-card-section>
+        </q-card>
+      </div>
     </div>
     <q-page-sticky position="bottom-right" :offset="fabPos">
-      <FabResidente :id="id" />
+      <FabResidente :id="id + ''" />
     </q-page-sticky>
   </q-page>
 </template>

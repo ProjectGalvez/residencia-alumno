@@ -89,12 +89,14 @@ const isActive = (routeName: string) => {
 
       <div class="q-mt-md">
         <div class="flex flex-center q-gutter-xs">
-          <a
+          <RouterLink
+            :to="{ name: 'estadisticas' }"
             class="GNL__drawer-footer-link"
-            href="javascript:void(0)"
-            aria-label="Privacidad"
-            >Privacidad</a
+            aria-label="Estadísticas"
           >
+            Estadísticas
+          </RouterLink>
+
           <span> · </span>
           <a
             class="GNL__drawer-footer-link"

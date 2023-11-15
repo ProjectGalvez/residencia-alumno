@@ -5,6 +5,7 @@ import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import { useRouter } from 'vue-router';
 import useEliminarEntregaEstudiante from 'src/modules/entregas/composables/useEliminarEntregaEstudiante';
 import DialogEliminar from 'src/shared/components/DialogEliminar.vue';
+import { date } from 'quasar';
 
 const props = defineProps<{ id: string }>();
 const id = toRef(props, 'id');
@@ -37,7 +38,7 @@ const eliminar = (id: string) => {
   <div class="q-px-lg q-py-md">
     <div class="fontsize-14 text-center text-weight-light flex items-center">
       <q-icon name="post_add" class="q-mr-xs" />
-      Entregas de documentos
+      Documentos entregados
     </div>
     <LoaderSpinner v-if="isLoading" />
     <q-timeline v-else-if="data" color="secondary">

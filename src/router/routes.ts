@@ -46,6 +46,13 @@ const routes: RouteRecordRaw[] = [
           import('src/modules/dashboard/pages/ResultadosBusqueda.vue'),
         name: 'buscar',
       },
+
+      {
+        path: '/estadisticas',
+        component: () =>
+          import('src/modules/estadisticas/pages/CarreraPeriodosPage.vue'),
+        name: 'estadisticas',
+      },
       //Usuarios *************************
       {
         path: '/usuarios',

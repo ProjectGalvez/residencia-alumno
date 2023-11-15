@@ -40,6 +40,10 @@ const useEliminarEntrega = (page: number) => {
           queryKey: ['entrega-por-residente'],
           exact: false,
         });
+        queryClient.invalidateQueries({
+          queryKey: ['documentos-pendientes'],
+          exact: false,
+        });
       },
       onError: (error) => {
         Notify.create({
