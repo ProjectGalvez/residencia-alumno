@@ -257,9 +257,12 @@ export interface Residente {
   nombre_carrera: string;
   color_carrera: string;
   nombre_empresa: string;
+  telefono_empresa: string;
   telefono_estudiante: string;
   numero_control_estudiante: string;
   proyecto: string;
+  total_documentos: number;
+  documentos_entregados?: number;
 }
 
 export interface VerResidente {
