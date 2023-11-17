@@ -89,6 +89,7 @@ const cambiarPassword = () => {
           <q-card-section class="cover-section">
             <div class="change-cover-button">
               <q-btn
+                class="glossy"
                 size="sm"
                 round
                 color="pink"
@@ -97,9 +98,10 @@ const cambiarPassword = () => {
               />
               <q-btn
                 v-if="saveCover"
+                class="glossy"
                 size="sm"
                 round
-                color="blue-grey-6"
+                color="green"
                 icon="save"
                 @click="handleActualizarPortada"
                 :isLoading="isLoadingPortada"
@@ -115,6 +117,7 @@ const cambiarPassword = () => {
 
             <div class="change-avatar-button">
               <q-btn
+                class="glossy"
                 size="sm"
                 round
                 color="pink"
@@ -125,8 +128,9 @@ const cambiarPassword = () => {
                 v-if="saveAvatar"
                 size="sm"
                 round
-                color="blue-grey-6"
+                color="green"
                 icon="save"
+                class="glossy"
                 @click="handleActualizarAvatar"
                 :isLoading="isLoadingAvatar"
               />

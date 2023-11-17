@@ -3,7 +3,7 @@ import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import PorPeriodoCarrera from '../components/PorPeriodoCarrera.vue';
 
-const links: Breadcrumb[] = [{ label: 'Estadísticas', icon: 'domain' }];
+const links: Breadcrumb[] = [{ label: 'Estadísticas', icon: 'show_chart' }];
 </script>
 <template>
   <q-page padding>
