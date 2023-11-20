@@ -21,6 +21,7 @@ const estudiante = ref<Estudiante>({
   telefono: '',
   password: '',
   url_foto: '',
+  genero: '',
 });
 
 const { createResource, isLoadingCreate, errorServer } = useCrearEstudiante();

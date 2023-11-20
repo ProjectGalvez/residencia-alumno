@@ -49,6 +49,19 @@ const eliminar = (id: string) => {
           <q-td key="fecha_termino" :props="props">{{
             props.row.fecha_termino
           }}</q-td>
+          <q-td key="fecha_termino" :props="props">
+            <q-chip
+              v-if="props.row.activo"
+              dense
+              icon="check_circle"
+              color="green"
+              text-color="white"
+              >En proceso</q-chip
+            >
+            <q-chip v-else dense icon="block" text-color="white" color="red"
+              >Inactivo</q-chip
+            >
+          </q-td>
           <q-td key="accion" :props="props">
             <q-btn-group push>
               <q-btn

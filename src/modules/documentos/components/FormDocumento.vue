@@ -26,6 +26,11 @@ const emitir = () => {
   saveDocumento.append('nombre_documento', documento.value.nombre_documento);
   saveDocumento.append('abrev_nombre', documento.value.abrev_nombre + '');
   saveDocumento.append('fecha_limite', fecha.value);
+  saveDocumento.append(
+    'entrega_estudiante',
+    documento.value.entrega_estudiante + ''
+  );
+  saveDocumento.append('descripcion', documento.value.descripcion + '');
   if (formatoInput.value) {
     saveDocumento.append('url_formato', formatoInput.value[0]);
   }
@@ -58,10 +63,11 @@ const errorMessages = computed(() => {
               </ul>
             </q-banner>
           </div>
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-sm-8">
             <q-input
               v-model="documento.nombre_documento"
               label-slot
+              hint="Nombre completo del documento: Solicitud de residencia profesional."
               :rules="[
                 (val) => !!val || 'El nombre del documento es requerido',
                 (value) =>
@@ -75,9 +81,10 @@ const errorMessages = computed(() => {
             </q-input>
           </div>
 
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-sm-4">
             <q-input
               v-model="documento.abrev_nombre"
+              hint="Abreviación del nombre del documento: Sol. residencia. 😜"
               label-slot
               :rules="[
                 (value) =>
@@ -94,6 +101,7 @@ const errorMessages = computed(() => {
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="fecha"
+              hint="Fecha programada para su entrega o fecha que debería llevar el documento."
               mask="date"
               :rules="[(val) => !!val || 'La fecha es requerida']"
               label-slot
@@ -128,6 +136,7 @@ const errorMessages = computed(() => {
             <q-file
               bottom-slots
               v-model="formatoInput"
+              hint="Archivo de formato del documento (imagen, word, pdf), es opcional."
               label-slot
               counter
               multiple
@@ -147,6 +156,43 @@ const errorMessages = computed(() => {
                 />
               </template>
             </q-file>
+          </div>
+
+          <div class="col-xs-12 col-sm-8">
+            <div>
+              Descripción del formato con lujo de detalles 😊
+              <q-editor
+                v-model="documento.descripcion"
+                :toolbar="[
+                  ['bold', 'italic', 'underline'],
+                  [
+                    {
+                      label: $q.lang.editor.formatting,
+                      icon: $q.iconSet.editor.formatting,
+                      list: 'no-icons',
+                      options: ['p', 'h3', 'h4', 'h5', 'h6', 'code'],
+                    },
+                  ],
+                  [
+                    {
+                      label: 'Dynamic label',
+                      icon: 'help_outline',
+                      options: ['left', 'center', 'right', 'justify'],
+                    },
+                  ],
+                ]"
+                min-height="5rem"
+              />
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <q-toggle
+              :false-value="0"
+              :true-value="1"
+              v-model="documento.entrega_estudiante"
+              label="Entegado por estudiante"
+              left-label
+            />
           </div>
 
           <div class="col-xs-12 col-sm-7">

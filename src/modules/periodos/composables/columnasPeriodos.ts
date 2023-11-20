@@ -23,6 +23,13 @@ export const columnasPeriodos: QTableColumn[] = [
     sortable: true,
   },
   {
+    field: 'activo',
+    name: 'activo',
+    label: 'Activo',
+    align: 'left',
+    sortable: false,
+  },
+  {
     field: 'accion',
     name: 'accion',
     label: 'Acción',

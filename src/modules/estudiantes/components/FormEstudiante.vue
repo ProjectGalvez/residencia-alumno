@@ -43,6 +43,7 @@ const emitir = () => {
     estudiante.value.no_seguridad_social + ''
   );
   estudianteForm.append('domicilio', estudiante.value.domicilio + '');
+  estudianteForm.append('genero', estudiante.value.genero.id + '');
   estudianteForm.append('password', estudiante.value.password + '');
   if (perfilInput.value != null) {
     estudianteForm.append('url_foto', perfilInput.value[0]);
@@ -75,6 +76,12 @@ const handleFileChange = (event: Event) => {
     imageUrl.value = URL.createObjectURL(image);
   }
 };
+
+const options = [
+  { id: 'M', name: 'Masculino' },
+  { id: 'F', name: 'Femenino' },
+  { id: 'X', name: 'No binario' },
+];
 </script>
 
 <template>
@@ -222,6 +229,16 @@ const handleFileChange = (event: Event) => {
                 <q-input v-model="estudiante.ciudad" label-slot>
                   <template v-slot:label> Ciudad: </template>
                 </q-input>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <q-select
+                  v-model="estudiante.genero"
+                  :options="options"
+                  label="Género"
+                  option-value="id"
+                  option-label="name"
+                />
+                {{ estudiante.genero.id }}
               </div>
 
               <div class="col-xs-12 col-sm-7">

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GenerarFormatos from '../components/GenerarFormatos.vue';
 import DocumentosPendientes from '../components/DocumentosPendientes.vue';
 import FabResidente from '../components/FabResidente.vue';
 import EntregasEstudiante from '../../estudiantes/components/EntregasEstudiante.vue';
@@ -38,6 +39,14 @@ const fabPos = ref([18, 18]);
         <q-card>
           <q-card-section>
             <DocumentosPendientes :id="id + ''" />
+          </q-card-section>
+        </q-card>
+      </div>
+
+      <div class="col-xs-12 col-md-6 q-pl-xs">
+        <q-card>
+          <q-card-section>
+            <GenerarFormatos :id="id + ''" />
           </q-card-section>
         </q-card>
       </div>

@@ -72,6 +72,25 @@ const isImage = computed(() => {
           </td>
         </tr>
         <tr>
+          <td>Entregado por estudiante:</td>
+          <td>
+            <div v-if="documento.entrega_estudiante">
+              Entregado por el estudiante
+            </div>
+            <div v-else>Generado por algún departamento</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Descripción:</td>
+          <td>
+            <q-card flat bordered>
+              <q-card-section>
+                <div v-html="documento.descripcion"></div>
+              </q-card-section>
+            </q-card>
+          </td>
+        </tr>
+        <tr>
           <td>Fecha registro:</td>
           <td>{{ date.formatDate(documento.created_at, 'DD/MM/YYYY') }}</td>
         </tr>

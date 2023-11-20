@@ -7,6 +7,10 @@ const useActualizarPeriodo = () => {
     queryKey: ['periodo-activo'],
     exact: false,
   });
+  queryClient.invalidateQueries({
+    queryKey: ['residentes'],
+    exact: false,
+  });
   return useActulizarRecursoJson<Periodo>('/periodos', 'listar-periodo');
 };
 export default useActualizarPeriodo;

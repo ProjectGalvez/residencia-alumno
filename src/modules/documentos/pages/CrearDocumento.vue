@@ -11,10 +11,11 @@ const documento = ref<Documento>({
   fecha_limite: null,
   url_formato: '',
   abrev_nombre: '',
+  descripcion: '',
+  entrega_estudiante: 0,
 });
 
-const { createResource, isLoadingCreate, errorServer, isSuccess, status } =
-  useCrearDocumento();
+const { createResource, isLoadingCreate, errorServer } = useCrearDocumento();
 const guardar = (documento: FormData) => {
   createResource(documento);
 };

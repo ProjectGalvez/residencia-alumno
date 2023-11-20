@@ -33,6 +33,8 @@ export interface Documento {
   abrev_nombre?: string;
   fecha_limite: Date | null;
   url_formato?: null | string;
+  entrega_estudiante: number | null;
+  descripcion: string;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -91,6 +93,7 @@ export interface Estudiante {
   numero_control: string;
   domicilio?: string;
   email: string;
+  genero: string;
   seguridad_social?: string;
   no_seguridad_social?: string | null;
   ciudad?: string;

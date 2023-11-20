@@ -29,10 +29,6 @@ const useAsignarResidencia = (id: string) => {
         exact: false,
       });
       queryClient.invalidateQueries({
-        queryKey: ['estudiantes'],
-        exact: false,
-      });
-      queryClient.invalidateQueries({
         queryKey: ['estudiantes-sin-residencia'],
         exact: false,
       });
