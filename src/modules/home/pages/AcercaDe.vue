@@ -32,10 +32,11 @@
           <q-card-section>
             <div class="text-body1">
               Esta aplicación web de Residencias Profesionales es el resultado
-              de un proyecto de tesis desarrollado por Hernández, quien se
-              dedicó a crear una solución versátil que simplifica y potencia la
-              gestión de proyectos de residencias profesionales, tanto para
-              estudiantes como para administradores.
+              de un proyecto de tesis desarrollado por Lizbeth Hernandez
+              Santiago y Verónica Gálvez Gregorio, quien se dedicó a crear una
+              solución versátil que simplifica y potencia la gestión de
+              proyectos de residencias profesionales, tanto para estudiantes
+              como para administradores.
             </div>
             <div class="text-body1">
               Para los estudiantes, representa una puerta de acceso al control

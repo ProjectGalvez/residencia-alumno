@@ -8,6 +8,10 @@ const useCrearEntrega = () => {
     queryKey: ['documentos-pendientes'],
     exact: false,
   });
+  queryClient.invalidateQueries({
+    queryKey: ['residentes'],
+    exact: false,
+  });
   return useCrearRecursoFormData<Entrega>('/entregas', 'listar-entrega');
 };
 export default useCrearEntrega;

@@ -107,7 +107,7 @@ const pdf = () => {
             <tbody>
               <tr
                 v-for="residente in residentes"
-                :key="residente.estudiante_id"
+                :key="residente.id_estudiante"
               >
                 <td>
                   <div class="flex items-center q-gutter-sm">
@@ -157,7 +157,7 @@ const pdf = () => {
                       push
                       glossy
                       icon="visibility"
-                      @click="verResidente(residente.estudiante_id)"
+                      @click="verResidente(residente.id_estudiante)"
                     />
                   </q-btn-group>
                   <q-circular-progress

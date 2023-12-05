@@ -104,8 +104,37 @@ export interface Estudiante {
   updated_at?: Date | string | null;
   user?: User;
   carrera?: Carrera;
-  empresas?: Empresa[];
-  periodos?: Periodo[];
+  empresa: Empresa;
+  periodo?: Periodo;
+}
+
+export interface Proyecto {
+  id: number;
+  nombre: string;
+  tipo: string;
+  carrera?: Carrera;
+  carrera_id?: number | null;
+}
+
+export interface ProyectoPaginado {
+  data: Proyecto[];
+  links: Links;
+  meta: Meta;
+}
+
+export interface AsesorPaginado {
+  data: Asesor[];
+  links: Links;
+  meta: Meta;
+}
+
+export interface Asesor {
+  id: number;
+  nombre: string;
+  apellidos: string;
+  email: string;
+  telefono: string;
+  titulo: string;
 }
 
 export interface Entrega {
@@ -253,19 +282,22 @@ export interface ResultadoBusqueda {
 
 //Residente en el admin
 export interface Residente {
-  estudiante_id: string;
+  id_estudiante: string;
   nombre_completo: string;
-  url_foto: null | string;
+  url_foto: null;
   iniciales_nombre_apellido: string;
-  nombre_carrera: string;
+  nombre_carrera?: string;
+  abrev_carrera: string;
   color_carrera: string;
   nombre_empresa: string;
   telefono_empresa: string;
   telefono_estudiante: string;
   numero_control_estudiante: string;
-  proyecto: string;
+  proyecto?: string;
+  tipo_proyecto?: string;
+  nombre_asesor?: null | string;
   total_documentos: number;
-  documentos_entregados?: number;
+  documentos_entregados: number;
 }
 
 export interface VerResidente {
@@ -307,7 +339,9 @@ export interface VerResidente {
   nombre_firmara: string;
   nombre_firmara_puesto: string;
   id_empresa: string;
-  proyecto: string;
+  proyecto?: string;
+  tipo_proyecto?: string;
+  nombre_asesor?: string;
 }
 
 export interface DocumentoPendienteRes {

@@ -34,6 +34,14 @@ const useEliminarEntregaEstudiante = () => {
           exact: false,
         });
         queryClient.invalidateQueries({
+          queryKey: ['residentes'],
+          exact: false,
+        });
+        queryClient.invalidateQueries({
+          queryKey: ['entregas'],
+          exact: false,
+        });
+        queryClient.invalidateQueries({
           queryKey: ['entrega-por-residente'],
           exact: false,
         });

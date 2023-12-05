@@ -37,6 +37,16 @@ const verResidente = (id: string) => {
 const editarResidente = (id: string) => {
   router.push({ name: 'editar-residente', params: { id } });
 };
+
+const porcentajeCalc = (entregados = 0, documentos = 0): number => {
+  if (documentos === 0) {
+    return 0;
+  }
+
+  const porcentaje = (entregados / documentos) * 100;
+  return Math.round(porcentaje);
+};
+
 const URL = `${process.env.SERVER_URL}`;
 const pdf = async () => {
   const exportURL = URL + '/residentes-export-pdf';
@@ -73,11 +83,12 @@ const pdf = async () => {
             <th>Estudiante</th>
             <th>Empresa</th>
             <th>Proyecto</th>
+            <th>Entregas</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="residente in residentes" :key="residente.estudiante_id">
+          <tr v-for="residente in residentes" :key="residente.id_estudiante">
             <td>
               <div class="flex items-center q-gutter-sm">
                 <div>
@@ -96,17 +107,86 @@ const pdf = async () => {
                       :style="{ backgroundColor: residente.color_carrera }"
                       text-color="white"
                     >
-                      {{ residente.nombre_carrera }}
+                      {{ residente.abrev_carrera }}
                     </q-chip>
-                    <q-chip dense color="teal" text-color="white" icon="call">
+                    <q-chip
+                      dense
+                      color="secondary"
+                      text-color="white"
+                      icon="call"
+                    >
                       {{ residente.telefono_estudiante }}
                     </q-chip>
                   </div>
                 </div>
               </div>
             </td>
-            <td class="columna-ancho-maximo">{{ residente.nombre_empresa }}</td>
-            <td class="columna-ancho-maximo">{{ residente.proyecto }}</td>
+            <td class="columna-ancho-maximo">
+              <div class="flex column">
+                {{ residente.nombre_empresa }}
+                <q-chip dense color="secondary" text-color="white" icon="call">
+                  {{ residente.telefono_empresa }}
+                </q-chip>
+              </div>
+            </td>
+
+            <td class="columna-ancho-maximo">
+              <div class="flex column">
+                {{ residente.proyecto }}
+                <div>
+                  <q-chip
+                    dense
+                    color="deep-purple"
+                    text-color="white"
+                    icon="checklist"
+                  >
+                    {{ residente.tipo_proyecto }}
+                  </q-chip>
+                  <q-chip
+                    v-if="residente.nombre_asesor"
+                    dense
+                    color="light-blue-10"
+                    text-color="white"
+                    icon="supervisor_account"
+                  >
+                    {{ residente.nombre_asesor }}
+                  </q-chip>
+                  <q-chip
+                    v-else
+                    dense
+                    color="orange"
+                    text-color="white"
+                    icon="block"
+                  >
+                    No hay asesor asignado
+                  </q-chip>
+                </div>
+              </div>
+            </td>
+            <td>
+              <q-circular-progress
+                show-value
+                font-size="12px"
+                :value="
+                  porcentajeCalc(
+                    residente.documentos_entregados,
+                    residente.total_documentos
+                  )
+                "
+                size="50px"
+                :thickness="0.22"
+                color="primary"
+                track-color="grey-3"
+                class="q-ma-md"
+              >
+                {{
+                  porcentajeCalc(
+                    residente.documentos_entregados,
+                    residente.total_documentos
+                  )
+                }}%
+              </q-circular-progress>
+            </td>
             <td>
               <q-btn-group push>
                 <q-btn
@@ -115,7 +195,7 @@ const pdf = async () => {
                   push
                   glossy
                   icon="visibility"
-                  @click="verResidente(residente.estudiante_id)"
+                  @click="verResidente(residente.id_estudiante)"
                 />
                 <q-btn
                   size="sm"
@@ -123,7 +203,7 @@ const pdf = async () => {
                   push
                   glossy
                   icon="edit"
-                  @click="editarResidente(residente.estudiante_id)"
+                  @click="editarResidente(residente.id_estudiante)"
                 />
                 <q-btn
                   size="sm"
@@ -131,7 +211,7 @@ const pdf = async () => {
                   push
                   glossy
                   icon="block"
-                  @click="eliminar(residente.estudiante_id)"
+                  @click="eliminar(residente.id_estudiante)"
                 />
               </q-btn-group>
             </td>

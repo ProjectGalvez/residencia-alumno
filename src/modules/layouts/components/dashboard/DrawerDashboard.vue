@@ -11,12 +11,16 @@ const links1 = [
 ];
 
 const links2 = [
+  { icon: 'engineering', text: 'Proyectos', to: 'listar-proyecto' },
+  { icon: 'supervisor_account', text: 'Asesores', to: 'listar-asesor' },
   { icon: 'domain', text: 'Empresas', to: 'listar-empresa' },
   { icon: 'date_range', text: 'Periodos', to: 'listar-periodo' },
   { icon: 'description', text: 'Documentos', to: 'listar-documento' },
   { icon: 'local_library', text: 'Carreras', to: 'listar-carrera' },
   { icon: 'account_balance', text: 'Departamentos', to: 'listar-departamento' },
 ];
+
+//listar-proyecto
 
 const links3 = [{ icon: '', text: 'Configuración' }];
 

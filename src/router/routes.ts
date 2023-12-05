@@ -144,6 +144,53 @@ const routes: RouteRecordRaw[] = [
         name: 'editar-estudiante',
       },
 
+      //Asesores
+      {
+        path: '/asesores',
+        component: () => import('src/modules/asesores/pages/ListarAsesor.vue'),
+        name: 'listar-asesor',
+      },
+      {
+        path: '/asesores/:id',
+        component: () => import('src/modules/asesores/pages/VerAsesor.vue'),
+        name: 'ver-asesor',
+      },
+      {
+        path: '/asesores/crear',
+        component: () => import('src/modules/asesores/pages/CrearAsesor.vue'),
+        name: 'crear-asesor',
+      },
+      {
+        path: '/asesores/:id/editar',
+        component: () => import('src/modules/asesores/pages/EditarAsesor.vue'),
+        name: 'editar-asesor',
+      },
+
+      //Proyectos
+      {
+        path: '/proyectos',
+        component: () =>
+          import('src/modules/proyectos/pages/ListarProyecto.vue'),
+        name: 'listar-proyecto',
+      },
+      {
+        path: '/proyectos/:id',
+        component: () => import('src/modules/proyectos/pages/VerProyecto.vue'),
+        name: 'ver-proyecto',
+      },
+      {
+        path: '/proyectos/crear',
+        component: () =>
+          import('src/modules/proyectos/pages/CrearProyecto.vue'),
+        name: 'crear-proyecto',
+      },
+      {
+        path: '/proyectos/:id/editar',
+        component: () =>
+          import('src/modules/proyectos/pages/EditarProyecto.vue'),
+        name: 'editar-proyecto',
+      },
+
       //Entregas
       {
         path: '/entregas',

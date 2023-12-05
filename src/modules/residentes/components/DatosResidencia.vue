@@ -15,6 +15,11 @@ const { isLoading, residente } = useVerResidente(id.value + '');
       <div class="text-weight-medium">
         Nombre del proyecto:
         <span class="text-data">{{ residente.proyecto }}</span>
+        <small>[{{ residente.tipo_proyecto }}]</small>
+      </div>
+      <div class="text-weight-medium">
+        Asesor interno:
+        <span>{{ residente.nombre_asesor }}</span>
       </div>
       <div class="text-weight-medium">
         Periodo proyectado:

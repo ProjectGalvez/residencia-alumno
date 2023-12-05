@@ -1,22 +1,25 @@
 <script setup lang="ts">
+import DialogAsesor from '../../../shared/components/DialogAsesor.vue';
+import SelectEstudiantesSInResidencia from '../../../shared/components/SelectEstudiantesSInResidencia.vue';
+import SelectEmpresa from '../../../shared/components/SelectEmpresa.vue';
+import SelectPeriodo from '../../../shared/components/SelectPeriodo.vue';
+import DialogProyecto from '../../../shared/components/DialogProyecto.vue';
+import SelectAsesor from '../../asesores/components/SelectAsesor.vue';
+import SelectProyecto from '../../../shared/components/SelectProyecto.vue';
 import { ref } from 'vue';
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
-import useObtenerPeriodos from 'src/modules/periodos/composables/useObtenerPeriodos';
-import useObtenerEmpresas from 'src/modules/empresas/composables/useObtenerEmpresas';
-import useEstudiantesSinResidencia from '../composables/useEstudiantesSinResidencia';
 import useAsignarResidencia from '../composables/useAsignarResidencia';
 
 const residente = ref({
   estudiante_id: '',
-  proyecto: '',
-  empresa_id: '',
-  periodo_id: '',
+  proyecto_id: null,
+  empresa_id: null,
+  periodo_id: null,
+  asesor_interno_id: null,
 });
-const { data: periodos, isLoading: isLoadingPeriodos } = useObtenerPeriodos();
-const { data: empresas, isLoading: isLoadingEmpresas } = useObtenerEmpresas();
-const { data: estudiantes, isLoading: isLoadingEstudiantes } =
-  useEstudiantesSinResidencia();
+const crearProyecto = ref(false);
+const crearAsesor = ref(false);
 const { mutate, isLoading: isLoadingAsignar } = useAsignarResidencia(
   residente.value.estudiante_id
 );
@@ -36,6 +39,8 @@ const links: Breadcrumb[] = [
       :pages="links"
       titlePage="Asignar residencia a un estudiante"
     />
+    <DialogProyecto v-model="crearProyecto" />
+    <DialogAsesor v-model="crearAsesor" />
     <div class="row">
       <div class="col">
         <q-card>
@@ -46,78 +51,54 @@ const links: Breadcrumb[] = [
                 <div class="col-xs-12 col-sm-8">
                   <div class="row q-col-gutter-md">
                     <div class="col-xs-12 col-sm-10">
-                      <q-select
+                      <SelectEstudiantesSInResidencia
                         v-model="residente.estudiante_id"
-                        :options="estudiantes"
-                        label-slot
-                        option-value="id"
-                        option-label="nombre"
-                        :loading="isLoadingEstudiantes"
-                        emit-value
-                        map-options
+                        label="Selecciona un estudiante"
                         :rules="[(val) => !!val || 'Selecciona un estudiante']"
-                      >
-                        <template v-slot:label>
-                          Selecciona un estudiante
-                          <span class="required-star">*</span>
-                        </template>
-                      </q-select>
+                      />
                     </div>
 
                     <div class="col-xs-12 col-sm-10">
-                      <q-input
-                        v-model="residente.proyecto"
-                        label-slot
-                        :rules="[
-                          (val) => !!val || 'El proyecto es requerido',
-                          (value) =>
-                            (value.length > 3 && value.length < 255) ||
-                            'Debe tener más de 3 caracteres y menos de 255',
-                        ]"
-                      >
-                        <template v-slot:label>
-                          Nombre del proyecto:
-                          <span class="required-star">*</span>
-                        </template>
-                      </q-input>
+                      <SelectProyecto
+                        v-model="residente.proyecto_id"
+                        label="Proyecto"
+                      />
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                      <q-btn
+                        label="Nuevo proyecto"
+                        size="sm"
+                        @click="crearProyecto = true"
+                      />
+                    </div>
+                    <div class="col-xs-12 col-sm-10">
+                      <SelectAsesor
+                        v-model="residente.asesor_interno_id"
+                        label="Asesor interno"
+                      />
+                    </div>
+                    <div class="col-xs-12 col-sm-2">
+                      <q-btn
+                        label="Nuevo asesor"
+                        size="sm"
+                        @click="crearAsesor = true"
+                      />
                     </div>
 
                     <div class="col-xs-12 col-sm-10">
-                      <q-select
+                      <SelectPeriodo
                         v-model="residente.periodo_id"
-                        :options="periodos"
-                        label-slot
-                        option-value="id"
-                        option-label="nombre"
-                        :loading="isLoadingPeriodos"
-                        emit-value
-                        map-options
+                        label="Selecciona un periodo"
                         :rules="[(val) => !!val || 'Selecciona un periodo']"
-                      >
-                        <template v-slot:label>
-                          Selecciona un periodo
-                          <span class="required-star">*</span>
-                        </template>
-                      </q-select>
+                      />
                     </div>
 
                     <div class="col-xs-12 col-sm-10">
-                      <q-select
+                      <SelectEmpresa
                         v-model="residente.empresa_id"
-                        :options="empresas"
-                        label-slot
-                        option-value="id"
-                        option-label="nombre"
-                        :loading="isLoadingEmpresas"
-                        emit-value
-                        map-options
+                        label="Selecciona una empresa"
                         :rules="[(val) => !!val || 'Selecciona una empresa']"
-                      >
-                        <template v-slot:label>
-                          Selecciona una empresa
-                          <span class="required-star">*</span>
-                        </template>
-                      </q-select>
+                      />
                     </div>
 
                     <div class="col-xs-12 col-sm-7">

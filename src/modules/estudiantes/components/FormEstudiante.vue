@@ -238,7 +238,6 @@ const options = [
                   option-value="id"
                   option-label="name"
                 />
-                {{ estudiante.genero.id }}
               </div>
 
               <div class="col-xs-12 col-sm-7">

@@ -28,6 +28,7 @@ const { isLoading, data } = useQuery({
   queryKey: ['entregas', page],
   queryFn: () => fetcher(page),
   keepPreviousData: true,
+  staleTime: 1000 * 60 * 10,
 });
 const { eliminarRecurso: eliminarEntrega } = useEliminarEntrega(page.value);
 
