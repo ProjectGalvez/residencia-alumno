@@ -4,7 +4,7 @@ import { ResidenciaEstudiante } from 'src/modules/model/Model';
 
 const getResidencia = async (): Promise<ResidenciaEstudiante[]> => {
   const { data } = await documentosApi.get<ResidenciaEstudiante[]>(
-    'estudiante-residencia'
+    '/estudiante-residencia'
   );
   return data;
 };
