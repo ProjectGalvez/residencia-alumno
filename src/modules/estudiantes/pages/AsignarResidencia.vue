@@ -1,57 +1,33 @@
 <script setup lang="ts">
+import SelectAsesor from '../../asesores/components/SelectAsesor.vue';
+import SelectProyecto from '../../../shared/components/SelectProyecto.vue';
+import SelectEmpresa from '../../../shared/components/SelectEmpresa.vue';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import useVerPeriodoActivo from '../composables/useVerPeriodoActivo';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import useVerEstudiante from '../composables/useVerEstudiante';
-import useObtenerEmpresas from 'src/modules/empresas/composables/useObtenerEmpresas';
-import documentosApi from 'src/api/documentosApi';
 
 import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import useAsignarResidencia from '../composables/useAsignarResidencia';
 
 const { resource, isLoading, error } = useVerPeriodoActivo();
-const { data: empresas, isLoading: loadingEmpresa } = useObtenerEmpresas();
-const lista = ref(empresas.value);
 
 const route = useRoute();
 const { id = '' } = route.params;
 const { resource: estudiante } = useVerEstudiante(id + '');
 const residencia = ref({
-  empresa_id: '',
-  proyecto: '',
+  empresa_id: null,
+  proyecto_id: null,
+  periodo_id: resource.value?.id,
+  asesor_interno_id: null,
+  estudiante_id: id,
 });
-const loading = ref(false);
-const onFilterTest = async (val, update /* abort */) => {
-  const nombre = val === '' ? '' : val;
-  loading.value = true;
-
-  const response = await documentosApi.get('/empresas-select', {
-    params: { nombre: nombre },
-  });
-  let list = response.data;
-  if (val) {
-    const needle = val.toLowerCase();
-    list = response.data.filter((x) => x.nombre.toLowerCase().includes(needle));
-  }
-  update(() => {
-    lista.value = list;
-    loading.value = false;
-  });
-};
 
 const { mutate, isLoading: loadingMutate } = useAsignarResidencia(id + '');
 const guardar = async () => {
-  try {
-    const objEnviar = {
-      empresa_id: residencia.value.empresa_id.id,
-      proyecto: residencia.value.proyecto,
-    };
-    mutate(objEnviar);
-  } catch (e) {
-    console.log(e);
-  }
+  mutate(residencia.value);
 };
 
 const links: Breadcrumb[] = [
@@ -65,7 +41,7 @@ const links: Breadcrumb[] = [
     <breadcrumb-nav :pages="links" titlePage="Asignar residencia" />
     <q-card>
       <q-card-section>
-        <LoaderSpinner v-if="isLoading && loadingEmpresa" />
+        <LoaderSpinner v-if="isLoading" />
         <div v-else-if="resource">
           <div
             v-if="estudiante"
@@ -77,48 +53,23 @@ const links: Breadcrumb[] = [
           <q-form @submit.prevent="guardar">
             <div class="row q-col-gutter-md">
               <div class="col-xs-12 col-sm-8">
-                <q-select
-                  clearable
+                <SelectEmpresa
                   v-model="residencia.empresa_id"
-                  use-input
-                  hide-selected
-                  fill-input
-                  :options="lista"
-                  option-value="id"
-                  option-label="nombre"
-                  input-debounce="0"
-                  label-slot
-                  @filter="onFilterTest"
-                  :rules="[(val) => !!val || 'Selecciona una empresa']"
-                >
-                  <template v-slot:label>
-                    Empresa de residencia <span class="required-star">*</span>
-                  </template>
-                  <template v-slot:no-option>
-                    <q-item>
-                      <q-item-section class="text-grey">
-                        No hay resultados
-                      </q-item-section>
-                    </q-item>
-                  </template>
-                </q-select>
+                  label="Selecciona una empresa"
+                />
               </div>
 
               <div class="col-xs-12 col-sm-8">
-                <q-input
-                  v-model="residencia.proyecto"
-                  :rules="[
-                    (val) => !!val || 'El nombre del proyecto es requerido',
-                    (value) =>
-                      (value.length > 3 && value.length < 250) ||
-                      'Debe tener más de 2 caracteres y menos de 250',
-                  ]"
-                  label-slot
-                >
-                  <template v-slot:label>
-                    Nombre del proyecto <span class="required-star">*</span>
-                  </template>
-                </q-input>
+                <SelectProyecto
+                  v-model="residencia.proyecto_id"
+                  label="Selecciona un proyecto"
+                />
+              </div>
+              <div class="col-xs-12 col-sm-8">
+                <SelectAsesor
+                  v-model="residencia.asesor_interno_id"
+                  label="Selecciona un asesor"
+                />
               </div>
 
               <div class="col-xs-12 col-sm-7">

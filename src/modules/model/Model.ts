@@ -340,7 +340,9 @@ export interface VerResidente {
   nombre_firmara_puesto: string;
   id_empresa: string;
   proyecto?: string;
+  proyecto_id?: number;
   tipo_proyecto?: string;
+  asesor_id: number;
   nombre_asesor?: string;
 }
 

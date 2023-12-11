@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import SelectAsesor from '../../asesores/components/SelectAsesor.vue';
+import SelectProyObj from '../../../shared/components/SelectProyObj.vue';
+import SelectAsesorObject from '../../asesores/components/SelectAsesorObject.vue';
 import SelectEmpresa from '../../../shared/components/SelectEmpresa.vue';
 import SelectPeriodo from '../../../shared/components/SelectPeriodo.vue';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import {
   ServerValidationError,
@@ -12,26 +13,50 @@ import { Breadcrumb } from 'src/shared/components/Breadcrum';
 import useVerResidente from '../composables/useVerResidente';
 import BreadcrumbNav from 'src/shared/components/BreadcrumbNav.vue';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
-import useObtenerEmpresas from 'src/modules/empresas/composables/useObtenerEmpresas';
 import useActualizarResidencia from '../composables/useActualizarResidencia';
 
 const route = useRoute();
 const { id = '' } = route.params;
 
 const { isLoading: isLoadingResidente, residente } = useVerResidente(id + '');
-const { data: empresas, isLoading: isLoadingEmpresas } = useObtenerEmpresas();
 const {
   mutate,
   errorServer,
   isLoading: isLoadignActualizar,
 } = useActualizarResidencia(id + '');
 
+interface Asesor {
+  id: number;
+  nombre_completo: string;
+}
+interface Proyecto {
+  id: number;
+  nombre: string;
+}
+const asesor = ref<Asesor>({
+  id: 0,
+  nombre_completo: '',
+});
+const proyecto = ref<Proyecto>({
+  id: 0,
+  nombre: '',
+});
+watch(residente, (newResidente, oldResidente) => {
+  if (newResidente) {
+    asesor.value.id = newResidente.asesor_id;
+    asesor.value.nombre_completo = newResidente.nombre_asesor;
+    proyecto.value.id = newResidente.proyecto_id;
+    proyecto.value.nombre = newResidente.proyecto;
+  }
+});
+
 const guardar = () => {
   const data = new FormData();
   data.append('estudiante_id', id + '');
   data.append('empresa_id', residente.value.id_empresa);
-  data.append('proyecto', residente.value.proyecto);
+  data.append('proyecto_id', proyecto.value.id + '');
   data.append('periodo_id', residente.value.id_periodo);
+  data.append('asesor_interno_id', asesor.value.id + '');
   mutate(data);
 };
 
@@ -82,29 +107,17 @@ const links: Breadcrumb[] = [
                     </div>
 
                     <div class="col-xs-12 col-sm-10">
-                      <q-input
-                        v-model="residente.proyecto"
-                        label-slot
-                        :rules="[
-                          (val) => !!val || 'El proyecto es requerido',
-                          (value) =>
-                            (value.length > 3 && value.length < 255) ||
-                            'Debe tener más de 3 caracteres y menos de 255',
-                        ]"
-                      >
-                        <template v-slot:label>
-                          Nombre del proyecto:
-                          <span class="required-star">*</span>
-                        </template>
-                      </q-input>
+                      <SelectProyObj
+                        v-model="proyecto"
+                        label="Selecciona un proyecto"
+                      />
                     </div>
 
                     <div class="col-xs-12 col-sm-10">
-                      <SelectAsesor
-                        v-model="residente.nombre_asesor"
-                        label="Asesor"
+                      <SelectAsesorObject
+                        v-model="asesor"
+                        label="Selecciona un asesor"
                       />
-                      Asesor{{ residente.nombre_asesor }}
                     </div>
 
                     <div class="col-xs-12 col-sm-10">

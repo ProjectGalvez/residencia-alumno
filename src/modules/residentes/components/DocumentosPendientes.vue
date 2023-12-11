@@ -2,7 +2,6 @@
 import { toRef } from 'vue';
 import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import useDocumentosPendientes from '../composables/useDocumentosPendientes';
-import { date } from 'quasar';
 
 const props = defineProps<{ id: string }>();
 const id = toRef(props, 'id');

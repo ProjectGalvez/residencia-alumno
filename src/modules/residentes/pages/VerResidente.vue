@@ -44,11 +44,7 @@ const fabPos = ref([18, 18]);
       </div>
 
       <div class="col-xs-12 col-md-6 q-pl-xs">
-        <q-card>
-          <q-card-section>
-            <GenerarFormatos :id="id + ''" />
-          </q-card-section>
-        </q-card>
+        <GenerarFormatos :id="id + ''" />
       </div>
     </div>
     <q-page-sticky position="bottom-right" :offset="fabPos">

@@ -2,25 +2,27 @@
 import documentosApi from 'src/api/documentosApi';
 import { computed, ref } from 'vue';
 
-interface Asesor {
+interface Proyecto {
   id: number;
-  nombre_completo: string;
+  nombre: string;
 }
+
 interface ComponentProps {
-  modelValue: Asesor | null;
+  modelValue: Proyecto | null;
   label: string;
 }
 const props = defineProps<ComponentProps>();
+
 const emit = defineEmits<{
-  (event: 'update:modelValue', newValue: Asesor | null): void;
+  (event: 'update:modelValue', newValue: Proyecto | null): void;
 }>();
 
 const model = computed({
   get: () => props.modelValue,
-  set: (newValue: Asesor | null) => emit('update:modelValue', newValue),
+  set: (newValue: Proyecto | null) => emit('update:modelValue', newValue),
 });
 
-const asesores = ref<Asesor[]>([]);
+const proyectos = ref<Proyecto[]>([]);
 const loading = ref(false);
 let abortController: AbortController | null = null;
 
@@ -32,7 +34,7 @@ function filterFn(val: string, update: (callback: () => void) => void) {
 
   if (val.length < 3) {
     update(() => {
-      asesores.value = [];
+      proyectos.value = [];
       loading.value = false;
     });
     return;
@@ -44,33 +46,33 @@ function filterFn(val: string, update: (callback: () => void) => void) {
   setTimeout(async () => {
     try {
       update(async () => {
-        const { data } = await documentosApi.get<Asesor[]>(
-          '/asesores-autocomplete',
+        const { data } = await documentosApi.get<Proyecto[]>(
+          '/proyectos-autocomplete',
           {
             params: {
               q: val,
             },
           }
         );
-        asesores.value = data;
+        proyectos.value = data;
         loading.value = false;
       });
     } catch (error) {
       loading.value = false;
     }
-  }, 0);
+  }, 500);
 }
 </script>
 
 <template>
   <q-select
     use-input
+    :label="label"
     v-model="model"
-    :label="props.label"
     :loading="loading"
-    option-label="nombre_completo"
-    :options="asesores"
-    hint="Escribe 3 o más caracteres para realizar la búsqueda"
+    option-label="nombre"
+    :options="proyectos"
+    hint="Escibre 3 o más caracteres para realizar la búsqueda"
     @filter="filterFn"
     emit-value
     map-options

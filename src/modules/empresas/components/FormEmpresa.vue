@@ -26,6 +26,7 @@ const errorMessages = computed(() => {
     errorServer.value as ServerValidationError | null
   );
 });
+const giro = ['Industrial', 'Servicios', 'Público', 'Privado', 'Otro'];
 </script>
 
 <template>
@@ -67,20 +68,16 @@ const errorMessages = computed(() => {
           </div>
 
           <div class="col-xs-12 col-sm-2">
-            <q-input
+            <q-select
               v-model="empresa.giro"
               label-slot
-              :rules="[
-                (val) => !!val || 'El giro de la empresa es requerido',
-                (value) =>
-                  (value.length > 3 && value.length < 255) ||
-                  'Debe tener más de 3 caracteres y menos de 255',
-              ]"
+              :options="giro"
+              :rules="[(val) => !!val || 'El giro de la empresa es requerido']"
             >
               <template v-slot:label>
                 Giro <span class="required-star">*</span>
               </template>
-            </q-input>
+            </q-select>
           </div>
 
           <div class="col-xs-12 col-sm-2">

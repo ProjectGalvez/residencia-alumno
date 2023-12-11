@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BotonDictamen from './BotonDictamen.vue';
 import { useQuery } from '@tanstack/vue-query';
 import documentosApi from 'src/api/documentosApi';
 import { Residente } from 'src/modules/model/Model';
@@ -6,6 +7,7 @@ import LoaderSpinner from 'src/shared/components/LoaderSpinner.vue';
 import useObtenerPeriodos from 'src/modules/periodos/composables/useObtenerPeriodos';
 import { toRef, ref, Ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import BotonPublicacionResultados from './BotonPublicacionResultados.vue';
 
 const props = defineProps<{ id: number }>();
 const id = toRef(props, 'id');
@@ -85,6 +87,12 @@ const pdf = () => {
         <div v-if="residentes && residentes.length > 0">
           <div class="flex justify-end">
             <div>
+              <BotonDictamen :carrera_id="id" :periodo_id="periodoId" />
+              <BotonPublicacionResultados
+                :carrera_id="id"
+                :periodo_id="periodoId"
+              />
+
               <q-btn
                 round
                 icon="picture_as_pdf"
@@ -133,7 +141,7 @@ const pdf = () => {
                         </q-chip>
                         <q-chip
                           dense
-                          color="teal"
+                          color="secondary"
                           text-color="white"
                           icon="call"
                         >
@@ -144,10 +152,50 @@ const pdf = () => {
                   </div>
                 </td>
                 <td class="columna-ancho-maximo">
-                  {{ residente.nombre_empresa }}
+                  <div class="flex column">
+                    {{ residente.nombre_empresa }}
+                    <q-chip
+                      dense
+                      color="secondary"
+                      text-color="white"
+                      icon="call"
+                    >
+                      {{ residente.telefono_empresa }}
+                    </q-chip>
+                  </div>
                 </td>
                 <td class="columna-ancho-maximo">
-                  {{ residente.proyecto }}
+                  <div class="flex column">
+                    {{ residente.proyecto }}
+                    <div>
+                      <q-chip
+                        dense
+                        color="deep-purple"
+                        text-color="white"
+                        icon="checklist"
+                      >
+                        {{ residente.tipo_proyecto }}
+                      </q-chip>
+                      <q-chip
+                        v-if="residente.nombre_asesor"
+                        dense
+                        color="light-blue-10"
+                        text-color="white"
+                        icon="supervisor_account"
+                      >
+                        {{ residente.nombre_asesor }}
+                      </q-chip>
+                      <q-chip
+                        v-else
+                        dense
+                        color="orange"
+                        text-color="white"
+                        icon="block"
+                      >
+                        No hay asesor asignado
+                      </q-chip>
+                    </div>
+                  </div>
                 </td>
                 <td>
                   <q-btn-group push>
