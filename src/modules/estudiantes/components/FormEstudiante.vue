@@ -43,7 +43,7 @@ const emitir = () => {
     estudiante.value.no_seguridad_social + ''
   );
   estudianteForm.append('domicilio', estudiante.value.domicilio + '');
-  estudianteForm.append('genero', estudiante.value.genero.id + '');
+  estudianteForm.append('genero', estudiante.value.genero + '');
   estudianteForm.append('password', estudiante.value.password + '');
   if (perfilInput.value != null) {
     estudianteForm.append('url_foto', perfilInput.value[0]);
@@ -237,6 +237,8 @@ const options = [
                   label="Género"
                   option-value="id"
                   option-label="name"
+                  emit-value
+                  map-options
                 />
               </div>
 

@@ -51,8 +51,8 @@ const porcentajeCalc = (entregados = 0, documentos = 0): number => {
 };
 
 const router = useRouter();
-const verResidente = (id: string) => {
-  router.push({ name: 'ver-residente', params: { id } });
+const verResidente = (idResidente: string) => {
+  router.push({ name: 'ver-residente', params: { id: idResidente } });
 };
 const URL = `${process.env.SERVER_URL}`;
 const pdf = () => {
@@ -115,7 +115,7 @@ const pdf = () => {
             <tbody>
               <tr
                 v-for="residente in residentes"
-                :key="residente.id_estudiante"
+                :key="residente.estudiante_id"
               >
                 <td>
                   <div class="flex items-center q-gutter-sm">
@@ -205,7 +205,7 @@ const pdf = () => {
                       push
                       glossy
                       icon="visibility"
-                      @click="verResidente(residente.id_estudiante)"
+                      @click="verResidente(residente.estudiante_id)"
                     />
                   </q-btn-group>
                   <q-circular-progress

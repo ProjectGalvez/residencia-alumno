@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TablaAreas from './TablaAreas.vue';
 import { toRef } from 'vue';
 import { Empresa } from 'src/modules/model/Model';
 
@@ -79,6 +80,15 @@ const empresa = toRef(props, 'empresa');
               </tr>
             </table>
           </div>
+        </q-card-section>
+        <q-card-section>
+          <div
+            class="fontsize-14 text-center text-weight-light flex items-center"
+          >
+            <q-icon name="date_range" class="q-mr-xs" />
+            Áreas de la empresa
+          </div>
+          <TablaAreas :empresa_id="empresa.id" />
         </q-card-section>
       </div>
     </div>

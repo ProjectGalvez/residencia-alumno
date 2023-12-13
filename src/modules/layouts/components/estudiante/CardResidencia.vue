@@ -91,6 +91,32 @@ const { isLoading, error, data } = useResidencia();
         </div>
       </div>
     </q-card-section>
+    <q-card-section>
+      <div
+        class="fit row wrap justify-start items-start content-start q-gutter-md"
+      >
+        <div class="col-auto">
+          <div class="text-weight-medium">Asesor interno:</div>
+          <div class="text-subtitle1 text-weight-light">
+            {{ residencia.asesor_inter }}
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <div class="text-weight-medium">Email del asesor:</div>
+          <div class="text-subtitle1 text-weight-light">
+            {{ residencia.email_asesor }}
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <div class="text-weight-medium">Teléfono del asesor:</div>
+          <div class="text-subtitle1 text-weight-light">
+            {{ residencia.telefono_asesor }}
+          </div>
+        </div>
+      </div>
+    </q-card-section>
   </q-card>
   <div v-else-if="data && data.length < 0">
     No se te ha asignado residencia aún

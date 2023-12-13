@@ -254,7 +254,10 @@ export interface ResidenciaEstudiante {
   telefono: string;
   titular: string;
   titular_puesto: string;
-  proyecto: string;
+  proyecto?: string;
+  asesor_inter?: string;
+  email_asesor?: string;
+  telefono_asesor?: string;
 }
 
 export interface EstudiantePaginado {
@@ -282,7 +285,7 @@ export interface ResultadoBusqueda {
 
 //Residente en el admin
 export interface Residente {
-  id_estudiante: string;
+  estudiante_id: string;
   nombre_completo: string;
   url_foto: null;
   iniciales_nombre_apellido: string;
@@ -356,4 +359,14 @@ export interface DocumentoPendienteRes {
   entrega_id: null | string;
   documento_entregado: null | string;
   fecha_limite_vencida: number;
+}
+
+export interface Area {
+  id: number;
+  empresa_id: string;
+  nombre: string;
+  asesor_externo?: string;
+  asesor_externo_puesto?: string;
+  nombre_firmara?: string;
+  nombre_firmara_puesto?: string;
 }

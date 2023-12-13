@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { computed, toRef } from 'vue';
+import InputArea from './InputArea.vue';
+import { computed, toRef, ref } from 'vue';
 import {
   ServerValidationError,
   generateErrorMessages,
 } from 'src/shared/helpers/errorUtils';
-import { Empresa } from 'src/modules/model/Model';
+import { Empresa, Area } from 'src/modules/model/Model';
 
 const props = defineProps<{
   empresa: Empresa;
@@ -27,6 +28,16 @@ const errorMessages = computed(() => {
   );
 });
 const giro = ['Industrial', 'Servicios', 'Público', 'Privado', 'Otro'];
+const verFormArea = ref(false);
+const area = ref<Area>({
+  id: 0,
+  empresa_id: '',
+  nombre: '',
+  asesor_externo: '',
+  asesor_externo_puesto: '',
+  nombre_firmara: '',
+  nombre_firmara_puesto: '',
+});
 </script>
 
 <template>
@@ -181,6 +192,23 @@ const giro = ['Industrial', 'Servicios', 'Público', 'Privado', 'Otro'];
               </template>
             </q-input>
           </div>
+
+          <!-- <div class="col-xs-12 col-sm-12">
+            <q-btn
+              v-if="verFormArea === false"
+              label="Agregar área"
+              color="secondary"
+              @click="verFormArea = true"
+            />
+            <q-btn
+              v-if="verFormArea"
+              label="Cancelar área"
+              color="negative"
+              @click="verFormArea = false"
+            />
+          </div> -->
+
+          <InputArea v-if="verFormArea" v-model="area" />
 
           <div class="col-xs-12 col-sm-6">
             <q-input v-model="empresa.asesor_externo" label-slot>
