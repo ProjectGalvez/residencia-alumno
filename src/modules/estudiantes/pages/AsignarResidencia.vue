@@ -18,7 +18,7 @@ const route = useRoute();
 const { id = '' } = route.params;
 const { resource: estudiante } = useVerEstudiante(id + '');
 const residencia = ref({
-  empresa_id: null,
+  area_id: null,
   proyecto_id: null,
   periodo_id: resource.value?.id,
   asesor_interno_id: null,
@@ -54,7 +54,7 @@ const links: Breadcrumb[] = [
             <div class="row q-col-gutter-md">
               <div class="col-xs-12 col-sm-8">
                 <SelectEmpresa
-                  v-model="residencia.empresa_id"
+                  v-model="residencia.area_id"
                   label="Selecciona una empresa"
                 />
               </div>

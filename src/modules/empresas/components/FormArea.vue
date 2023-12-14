@@ -49,7 +49,7 @@ const errorMessages = computed(() => {
             </q-banner>
           </div>
 
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-sm-12">
             <q-input
               v-model="area.nombre"
               label-slot

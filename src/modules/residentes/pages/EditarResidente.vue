@@ -53,7 +53,7 @@ watch(residente, (newResidente, oldResidente) => {
 const guardar = () => {
   const data = new FormData();
   data.append('estudiante_id', id + '');
-  data.append('empresa_id', residente.value.id_empresa);
+  data.append('area_id', residente.value.area_id);
   data.append('proyecto_id', proyecto.value.id + '');
   data.append('periodo_id', residente.value.id_periodo);
   data.append('asesor_interno_id', asesor.value.id + '');
@@ -130,7 +130,7 @@ const links: Breadcrumb[] = [
 
                     <div class="col-xs-12 col-sm-10">
                       <SelectEmpresa
-                        v-model="residente.id_empresa"
+                        v-model="residente.area_id"
                         label="Selecciona una empresa"
                         :rules="[(val) => !!val || 'Selecciona una empresa']"
                       />

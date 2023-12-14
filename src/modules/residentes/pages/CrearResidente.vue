@@ -14,7 +14,7 @@ import useAsignarResidencia from '../composables/useAsignarResidencia';
 const residente = ref({
   estudiante_id: '',
   proyecto_id: null,
-  empresa_id: null,
+  area_id: null,
   periodo_id: null,
   asesor_interno_id: null,
 });
@@ -95,7 +95,7 @@ const links: Breadcrumb[] = [
 
                     <div class="col-xs-12 col-sm-10">
                       <SelectEmpresa
-                        v-model="residente.empresa_id"
+                        v-model="residente.area_id"
                         label="Selecciona una empresa"
                         :rules="[(val) => !!val || 'Selecciona una empresa']"
                       />

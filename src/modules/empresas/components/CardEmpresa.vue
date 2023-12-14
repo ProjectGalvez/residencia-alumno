@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BotonNuevaArea from './BotonNuevaArea.vue';
 import TablaAreas from './TablaAreas.vue';
 import { toRef } from 'vue';
 import { Empresa } from 'src/modules/model/Model';
@@ -10,7 +11,7 @@ const empresa = toRef(props, 'empresa');
 <template>
   <q-card>
     <div class="row">
-      <div class="col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-12">
         <q-card-section>
           <div
             class="fontsize-14 text-center text-weight-light flex items-center"
@@ -88,7 +89,15 @@ const empresa = toRef(props, 'empresa');
             <q-icon name="date_range" class="q-mr-xs" />
             Áreas de la empresa
           </div>
-          <TablaAreas :empresa_id="empresa.id" />
+          <div>
+            <div class="col-xs-12 col-sm-12">
+              <BotonNuevaArea :empresa_id="empresa.id" />
+            </div>
+
+            <div class="col-xs-12 col-sm-12">
+              <TablaAreas :empresa_id="empresa.id" />
+            </div>
+          </div>
         </q-card-section>
       </div>
     </div>

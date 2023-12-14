@@ -342,6 +342,7 @@ export interface VerResidente {
   nombre_firmara: string;
   nombre_firmara_puesto: string;
   id_empresa: string;
+  area_id: number;
   proyecto?: string;
   proyecto_id?: number;
   tipo_proyecto?: string;
