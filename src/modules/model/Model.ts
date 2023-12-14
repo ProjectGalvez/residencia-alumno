@@ -65,6 +65,7 @@ export interface Empresa {
   asesor_externo_puesto?: string;
   nombre_firmara?: string;
   nombre_firmara_puesto?: string;
+  nombre_empresa?: string;
   created_at?: Date | string | null;
   updated_at?: Date | string | null;
 }

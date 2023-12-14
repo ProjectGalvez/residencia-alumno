@@ -63,22 +63,6 @@ const empresa = toRef(props, 'empresa');
                 <td>Puesto del titular:</td>
                 <td>{{ empresa.titular_puesto }}</td>
               </tr>
-              <tr>
-                <td>Asesor externo:</td>
-                <td>{{ empresa.asesor_externo }}</td>
-              </tr>
-              <tr>
-                <td>Domicilio:</td>
-                <td>{{ empresa.asesor_externo_puesto }}</td>
-              </tr>
-              <tr>
-                <td>Nombre del que firmará:</td>
-                <td>{{ empresa.nombre_firmara }}</td>
-              </tr>
-              <tr>
-                <td>Domicilio:</td>
-                <td>{{ empresa.nombre_firmara_puesto }}</td>
-              </tr>
             </table>
           </div>
         </q-card-section>

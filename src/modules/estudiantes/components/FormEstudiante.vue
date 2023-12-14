@@ -82,6 +82,7 @@ const options = [
   { id: 'F', name: 'Femenino' },
   { id: 'X', name: 'No binario' },
 ];
+const seguridadSocial = ['IMSS', 'ISSSTE', 'OTROS'];
 </script>
 
 <template>
@@ -206,9 +207,13 @@ const options = [
               </div>
 
               <div class="col-xs-12 col-sm-6">
-                <q-input v-model="estudiante.seguridad_social" label-slot>
-                  <template v-slot:label> Seguridad social: </template>
-                </q-input>
+                <q-select
+                  v-model="estudiante.seguridad_social"
+                  :options="seguridadSocial"
+                  label="Seguridad social:"
+                  emit-value
+                  map-options
+                />
               </div>
 
               <div class="col-xs-12 col-sm-6">

@@ -3,6 +3,7 @@ import { toRef, ref } from 'vue';
 import { Estudiante } from 'src/modules/model/Model';
 import FabEstudiante from './FabEstudiante.vue';
 import EntregasEstudiante from './EntregasEstudiante.vue';
+import CardEmpresa from '../components/CardEmpresa.vue';
 
 const props = defineProps<{ estudiante: Estudiante }>();
 const estudiante = toRef(props, 'estudiante');
@@ -137,80 +138,7 @@ const fabPos = ref([18, 18]);
 
     <div class="row" v-if="estudiante.empresa">
       <div class="col-xs-12 col-md-6 q-pa-xs">
-        <q-card>
-          <q-card-section>
-            <div
-              class="fontsize-13 text-center text-weight-light flex items-center"
-            >
-              <q-icon name="domain" class="q-mr-xs" />
-              Empresa en la que realiza su residencia
-            </div>
-          </q-card-section>
-          <q-card-section>
-            <table>
-              <tr>
-                <td>Nombre:</td>
-                <td>{{ estudiante.empresa.nombre }}</td>
-              </tr>
-              <tr>
-                <td>Giro:</td>
-                <td>{{ estudiante.empresa.giro }}</td>
-              </tr>
-              <tr>
-                <td>RFC:</td>
-                <td>{{ estudiante.empresa.rfc }}</td>
-              </tr>
-              <tr>
-                <td>Domicilio:</td>
-                <td>{{ estudiante.empresa.domicilio }}</td>
-              </tr>
-              <tr>
-                <td>Colinia:</td>
-                <td>{{ estudiante.empresa.colonia }}</td>
-              </tr>
-              <tr>
-                <td>Código postal:</td>
-                <td>{{ estudiante.empresa.cp }}</td>
-              </tr>
-              <tr>
-                <td>Ciudad:</td>
-                <td>{{ estudiante.empresa.ciudad }}</td>
-              </tr>
-              <tr>
-                <td>Teléfono:</td>
-                <td>{{ estudiante.empresa.telefono }}</td>
-              </tr>
-              <tr>
-                <td>Misión:</td>
-                <td>{{ estudiante.empresa.mision }}</td>
-              </tr>
-              <tr>
-                <td>Titular:</td>
-                <td>{{ estudiante.empresa.titular }}</td>
-              </tr>
-              <tr>
-                <td>Puesto del titular:</td>
-                <td>{{ estudiante.empresa.titular_puesto }}</td>
-              </tr>
-              <tr>
-                <td>Asesor externo:</td>
-                <td>{{ estudiante.empresa.asesor_externo }}</td>
-              </tr>
-              <tr>
-                <td>Domicilio:</td>
-                <td>{{ estudiante.empresa.asesor_externo_puesto }}</td>
-              </tr>
-              <tr>
-                <td>Nombre del que firmará:</td>
-                <td>{{ estudiante.empresa.nombre_firmara }}</td>
-              </tr>
-              <tr>
-                <td>Domicilio:</td>
-                <td>{{ estudiante.empresa.nombre_firmara_puesto }}</td>
-              </tr>
-            </table>
-          </q-card-section>
-        </q-card>
+        <CardEmpresa :id="estudiante.id" />
       </div>
       <div class="col-xs-12 col-md-6 q-pa-xs">
         <q-card>

@@ -208,32 +208,6 @@ const area = ref<Area>({
             />
           </div> -->
 
-          <InputArea v-if="verFormArea" v-model="area" />
-
-          <div class="col-xs-12 col-sm-6">
-            <q-input v-model="empresa.asesor_externo" label-slot>
-              <template v-slot:label> Nombre del asesor externo </template>
-            </q-input>
-          </div>
-
-          <div class="col-xs-12 col-sm-6">
-            <q-input v-model="empresa.asesor_externo_puesto" label-slot>
-              <template v-slot:label> Puesto del asesor externo </template>
-            </q-input>
-          </div>
-
-          <div class="col-xs-12 col-sm-6">
-            <q-input v-model="empresa.nombre_firmara" label-slot>
-              <template v-slot:label> Nombre del que firmará </template>
-            </q-input>
-          </div>
-
-          <div class="col-xs-12 col-sm-6">
-            <q-input v-model="empresa.nombre_firmara_puesto" label-slot>
-              <template v-slot:label> Puesto del que firmará </template>
-            </q-input>
-          </div>
-
           <div class="col-xs-12 col-sm-7">
             <q-btn
               label="Guardar"
